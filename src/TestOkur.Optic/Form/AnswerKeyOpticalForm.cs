@@ -48,31 +48,26 @@
 
 		public List<AnswerKeyOpticalForm> Expand()
 		{
-			var formA = new AnswerKeyOpticalForm(this, 'A');
-			var formB = new AnswerKeyOpticalForm(this, 'B');
-			var formC = new AnswerKeyOpticalForm(this, 'C');
-			var formD = new AnswerKeyOpticalForm(this, 'D');
+			var formDictionary = new Dictionary<char, AnswerKeyOpticalForm>()
+			{
+				{ 'A', new AnswerKeyOpticalForm(this, 'A') },
+				{ 'B', new AnswerKeyOpticalForm(this, 'B') },
+				{ 'C', new AnswerKeyOpticalForm(this, 'C') },
+				{ 'D', new AnswerKeyOpticalForm(this, 'D') },
+			};
 
 			foreach (var section in Sections)
 			{
 				foreach (var answer in section.Answers)
 				{
-					formA.AddAnswer(section, answer.QuestionNo, answer);
-					formB.AddAnswer(section, answer.QuestionNoBookletB, answer);
-					formC.AddAnswer(section, answer.QuestionNoBookletC, answer);
-					formD.AddAnswer(section, answer.QuestionNoBookletD, answer);
+					formDictionary['A'].AddAnswer(section, answer.QuestionNo, answer);
+					formDictionary['B'].AddAnswer(section, answer.QuestionNoBookletB, answer);
+					formDictionary['C'].AddAnswer(section, answer.QuestionNoBookletC, answer);
+					formDictionary['D'].AddAnswer(section, answer.QuestionNoBookletD, answer);
 				}
 			}
 
-			var list = new List<AnswerKeyOpticalForm>()
-			{
-				formA,
-				formB,
-				formC,
-				formD
-			};
-
-			return list.Where(a => !a.Empty).ToList();
+			return formDictionary.Values.Where(a => !a.Empty).ToList();
 		}
 	}
 }
