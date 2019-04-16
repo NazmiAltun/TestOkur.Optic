@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A30DF4A2-CE5C-4652-BE46-17B7BA48592A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2D01A7D4-A916-434A-B532-F93C6B557754}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestOkur.Optic", "src\TestOkur.Optic\TestOkur.Optic.csproj", "{D1391F20-67A0-441D-A1D5-D3F315255FC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestOkur.Optic.Tests", "tests\TestOkur.Optic.Tests\TestOkur.Optic.Tests.csproj", "{C44A5251-77C6-4199-A1CE-C88BF68B320D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1391F20-67A0-441D-A1D5-D3F315255FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1391F20-67A0-441D-A1D5-D3F315255FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1391F20-67A0-441D-A1D5-D3F315255FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1391F20-67A0-441D-A1D5-D3F315255FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C44A5251-77C6-4199-A1CE-C88BF68B320D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C44A5251-77C6-4199-A1CE-C88BF68B320D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C44A5251-77C6-4199-A1CE-C88BF68B320D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C44A5251-77C6-4199-A1CE-C88BF68B320D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D1391F20-67A0-441D-A1D5-D3F315255FC7} = {A30DF4A2-CE5C-4652-BE46-17B7BA48592A}
+		{C44A5251-77C6-4199-A1CE-C88BF68B320D} = {2D01A7D4-A916-434A-B532-F93C6B557754}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A51BE1A4-82CF-496F-9234-AA7D2C5498C7}
+	EndGlobalSection
+EndGlobal
