@@ -7,42 +7,43 @@
 
 	public class AnswerKeyOpticalForm : OpticalForm
 	{
-		private readonly SortedList<int, AnswerKeyQuestionAnswer> _answers;
-
 		public AnswerKeyOpticalForm()
 		{
-			_answers = new SortedList<int, AnswerKeyQuestionAnswer>();
+			Sections = new List<AnswerKeyOpticalFormSection>();
 		}
 
 		private AnswerKeyOpticalForm(AnswerKeyOpticalForm form, char booklet)
 			: base(form, booklet)
 		{
 			IncorrectEliminationRate = form.IncorrectEliminationRate;
-			_answers = new SortedList<int, AnswerKeyQuestionAnswer>();
+			Sections = new List<AnswerKeyOpticalFormSection>();
 		}
+
+		public bool Empty => Sections.SelectMany(s => s.Answers).All(a => a.QuestionNo == default);
 
 		public int IncorrectEliminationRate { get; set; }
 
-		public IReadOnlyList<AnswerKeyQuestionAnswer> Answers => _answers.Values.ToList();
+		public List<AnswerKeyOpticalFormSection> Sections { get; set; }
+
+		public List<AnswerKeyQuestionAnswer> Answers => Sections.SelectMany(s => s.Answers).ToList();
 
 		public List<ScoreFormula> ScoreFormulas { get; set; }
 
-		public void AddAnswers(IEnumerable<AnswerKeyQuestionAnswer> answers)
+		public void AddSection(AnswerKeyOpticalFormSection section)
 		{
-			foreach (var answer in answers)
-			{
-				AddAnswer(answer);
-			}
+			Sections.Add(section);
 		}
 
-		public void AddAnswer(AnswerKeyQuestionAnswer value)
+		public void AddAnswer(AnswerKeyOpticalFormSection section, int questionNo, QuestionAnswer questionAnswer)
 		{
-			if (value.QuestionNo == 0)
+			if (!Sections.Contains(section))
 			{
-				return;
+				Sections.Add(new AnswerKeyOpticalFormSection(section));
 			}
 
-			_answers.Add((value.LessonOrder * 1000) + value.QuestionNo, value);
+			Sections
+				.First(s => s.LessonName == section.LessonName)
+				.AddAnswer(new AnswerKeyQuestionAnswer(questionNo, questionAnswer));
 		}
 
 		public List<AnswerKeyOpticalForm> Expand()
@@ -52,12 +53,15 @@
 			var formC = new AnswerKeyOpticalForm(this, 'C');
 			var formD = new AnswerKeyOpticalForm(this, 'D');
 
-			foreach (var answer in Answers)
+			foreach (var section in Sections)
 			{
-				formA.AddAnswer(new AnswerKeyQuestionAnswer(answer.QuestionNo, answer));
-				formB.AddAnswer(new AnswerKeyQuestionAnswer(answer.QuestionNoBookletB, answer));
-				formC.AddAnswer(new AnswerKeyQuestionAnswer(answer.QuestionNoBookletC, answer));
-				formD.AddAnswer(new AnswerKeyQuestionAnswer(answer.QuestionNoBookletD, answer));
+				foreach (var answer in section.Answers)
+				{
+					formA.AddAnswer(section, answer.QuestionNo, answer);
+					formB.AddAnswer(section, answer.QuestionNoBookletB, answer);
+					formC.AddAnswer(section, answer.QuestionNoBookletC, answer);
+					formD.AddAnswer(section, answer.QuestionNoBookletD, answer);
+				}
 			}
 
 			var list = new List<AnswerKeyOpticalForm>()
@@ -68,15 +72,7 @@
 				formD
 			};
 
-			for (var i = 0; i < list.Count; i++)
-			{
-				if (list[i].Answers.All(a => a.QuestionNo == default))
-				{
-					list.RemoveAt(i--);
-				}
-			}
-
-			return list;
+			return list.Where(a => !a.Empty).ToList();
 		}
 	}
 }

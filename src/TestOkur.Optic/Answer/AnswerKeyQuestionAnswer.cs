@@ -17,9 +17,6 @@
 		}
 
 		public AnswerKeyQuestionAnswer(
-			int lessonId,
-			string lessonName,
-			int lessonOrder,
 			int questionNo,
 			int questionNoBookletB,
 			int questionNoBookletC,
@@ -27,18 +24,11 @@
 			char answer)
 		{
 			QuestionNo = questionNo;
-			LessonId = lessonId;
-			LessonName = lessonName;
-			LessonOrder = lessonOrder;
 			QuestionNoBookletB = questionNoBookletB;
 			QuestionNoBookletC = questionNoBookletC;
 			QuestionNoBookletD = questionNoBookletD;
 			Answer = answer;
 		}
-
-		public string LessonName { get; set; }
-
-		public int LessonId { get; set; }
 
 		public int QuestionNoBookletB { get; set; }
 
@@ -46,10 +36,6 @@
 
 		public int QuestionNoBookletD { get; set; }
 
-		public int LessonOrder { get; set; }
-
 		public QuestionAnswerCancelAction QuestionAnswerCancelAction { get; set; }
-
-		public string Key => $"{LessonName}_{QuestionNo}";
 	}
 }

@@ -18,7 +18,7 @@
 			{
 				Sections = new List<StudentOpticalFormSection>()
 				{
-					new StudentOpticalFormSection("Turkce", 1)
+					new StudentOpticalFormSection(1, "Turkce")
 					{
 						Answers = new List<QuestionAnswer>()
 						{
@@ -27,7 +27,7 @@
 							new QuestionAnswer(3, 'C'),
 						}
 					},
-					new StudentOpticalFormSection("Matematik", 2)
+					new StudentOpticalFormSection(2, "Matematik")
 					{
 						Answers = new List<QuestionAnswer>()
 						{
@@ -42,7 +42,7 @@
 			};
 			var sections = new List<StudentOpticalFormSection>()
 			{
-				new StudentOpticalFormSection("Turkce", 1)
+				new StudentOpticalFormSection(1, "Turkce")
 				{
 					Answers = new List<QuestionAnswer>()
 					{
@@ -50,7 +50,7 @@
 						new QuestionAnswer(2, 'D')
 					}
 				},
-				new StudentOpticalFormSection("Matematik", 2)
+				new StudentOpticalFormSection(2, "Matematik")
 				{
 					Answers = new List<QuestionAnswer>()
 					{
@@ -59,7 +59,7 @@
 						new QuestionAnswer(3, 'E'),
 					}
 				},
-				new StudentOpticalFormSection("Fen", 3)
+				new StudentOpticalFormSection(3, "Fen")
 				{
 					Answers = new List<QuestionAnswer>()
 					{
@@ -73,13 +73,13 @@
 				.HaveCount(sections.Count)
 				.And
 				.Contain(s => s.LessonName == "Turkce" &&
-				              string.Join(',', s.Answers.Select(a => a.Answer)) == "E,D")
+							  string.Join(',', s.Answers.Select(a => a.Answer)) == "E,D")
 				.And
 				.Contain(s => s.LessonName == "Matematik" &&
-				              string.Join(',', s.Answers.Select(a => a.Answer)) == "A,B,E")
+							  string.Join(',', s.Answers.Select(a => a.Answer)) == "A,B,E")
 				.And
 				.Contain(s => s.LessonName == "Fen" &&
-				              string.Join(',', s.Answers.Select(a => a.Answer)) == "B,C");
+							  string.Join(',', s.Answers.Select(a => a.Answer)) == "B,C");
 		}
 
 		[Fact]
@@ -88,8 +88,8 @@
 			var form = new StudentOpticalForm();
 			var sections = new List<StudentOpticalFormSection>()
 			{
-				new StudentOpticalFormSection("Turkce", 1),
-				new StudentOpticalFormSection("Matematik", 2)
+				new StudentOpticalFormSection(1, "Turkce"),
+				new StudentOpticalFormSection(2, "Matematik")
 			};
 			form.AddSections(sections);
 			form.Sections.Should()
@@ -114,45 +114,37 @@
 						Coefficients = new List<LessonCoefficient>()
 						{
 							new LessonCoefficient("Tr", 4.33f),
-							new LessonCoefficient("Mat", 3.296f),
+							new LessonCoefficient("Math", 3.296f),
 							new LessonCoefficient("Science", 2.601f),
-							new LessonCoefficient("Soc", 2.773f)
+							new LessonCoefficient("Social Science", 2.773f)
 						}
 					}
 				}
 			};
-			answerKeyOpticalForm.AddAnswers(CreateAnswerKeyQuestionAnswers(1, "Tr", 15));
-			answerKeyOpticalForm.AddAnswers(CreateAnswerKeyQuestionAnswers(2, "Mat", 15));
-			answerKeyOpticalForm.AddAnswers(CreateAnswerKeyQuestionAnswers(3, "Science", 10));
-			answerKeyOpticalForm.AddAnswers(CreateAnswerKeyQuestionAnswers(4, "Soc", 8));
+			answerKeyOpticalForm.AddSection(CreateSection(1, "Tr", 15));
+			answerKeyOpticalForm.AddSection(CreateSection(2, "Math", 15));
+			answerKeyOpticalForm.AddSection(CreateSection(3, "Science", 10));
+			answerKeyOpticalForm.AddSection(CreateSection(4, "Social Science", 8));
 
 			var studentForm = new StudentOpticalForm()
 			{
 				Booklet = 'A',
 				Sections = new List<StudentOpticalFormSection>()
 				{
-					new StudentOpticalFormSection()
+					new StudentOpticalFormSection(1, "Tr")
 					{
-						LessonName = "Tr",
-						LessonId = 1,
 						Answers = CreateQuestionAnswers(15)
 					},
-					new StudentOpticalFormSection()
+					new StudentOpticalFormSection(2, "Math")
 					{
-						LessonName = "Mat",
-						LessonId = 2,
 						Answers = CreateQuestionAnswers(15)
 					},
-					new StudentOpticalFormSection()
+					new StudentOpticalFormSection(3, "Science")
 					{
-						LessonName = "Science",
-						LessonId = 3,
 						Answers = CreateQuestionAnswers(10)
 					},
-					new StudentOpticalFormSection()
+					new StudentOpticalFormSection(4, "Social Science")
 					{
-						LessonName = "Soc",
-						LessonId = 4,
 						Answers = CreateQuestionAnswers(8)
 					},
 				}
@@ -170,33 +162,35 @@
 				Booklet = 'A',
 				IncorrectEliminationRate = 4,
 			};
-			answerKeyOpticalForm.AddAnswers(new[]
+			answerKeyOpticalForm.AddSection(new AnswerKeyOpticalFormSection(1, "Test")
 			{
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 1, 0, 0, 0, 'A'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 2, 0, 0, 0, 'B'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 3, 0, 0, 0, 'C'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 4, 0, 0, 0, 'D'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 5, 0, 0, 0, 'E'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 6, 0, 0, 0, 'A'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 7, 0, 0, 0, 'B'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 8, 0, 0, 0, 'C'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 9, 0, 0, 0, 'D'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 10, 0, 0, 0, 'E'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 11, 0, 0, 0, 'B'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 12, 0, 0, 0, 'C'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 13, 0, 0, 0, 'A'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 14, 0, 0, 0, 'A'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 15, 0, 0, 0, 'A'),
+				Answers = new List<AnswerKeyQuestionAnswer>()
+				{
+					new AnswerKeyQuestionAnswer(1, 0, 0, 0, 'A'),
+					new AnswerKeyQuestionAnswer(2, 0, 0, 0, 'B'),
+					new AnswerKeyQuestionAnswer(3, 0, 0, 0, 'C'),
+					new AnswerKeyQuestionAnswer(4, 0, 0, 0, 'D'),
+					new AnswerKeyQuestionAnswer(5, 0, 0, 0, 'E'),
+					new AnswerKeyQuestionAnswer(6, 0, 0, 0, 'A'),
+					new AnswerKeyQuestionAnswer(7, 0, 0, 0, 'B'),
+					new AnswerKeyQuestionAnswer(8, 0, 0, 0, 'C'),
+					new AnswerKeyQuestionAnswer(9, 0, 0, 0, 'D'),
+					new AnswerKeyQuestionAnswer(10, 0, 0, 0, 'E'),
+					new AnswerKeyQuestionAnswer(11, 0, 0, 0, 'B'),
+					new AnswerKeyQuestionAnswer(12, 0, 0, 0, 'C'),
+					new AnswerKeyQuestionAnswer(13, 0, 0, 0, 'A'),
+					new AnswerKeyQuestionAnswer(14, 0, 0, 0, 'A'),
+					new AnswerKeyQuestionAnswer(15, 0, 0, 0, 'A'),
+				}
 			});
+
 			var studentForm = new StudentOpticalForm()
 			{
 				Booklet = 'A',
 				Sections = new List<StudentOpticalFormSection>()
 				{
-					new StudentOpticalFormSection()
+					new StudentOpticalFormSection(1, "Test")
 					{
-						LessonName = "Test",
-						LessonId = 1,
 						Answers = new List<QuestionAnswer>()
 						{
 							new QuestionAnswer(1, 'A'),
@@ -238,14 +232,17 @@
 				ExamName = "Test",
 				IncorrectEliminationRate = 4,
 			};
-			answerKeyOpticalForm.AddAnswers(new[]
+			answerKeyOpticalForm.AddSection(new AnswerKeyOpticalFormSection(1, "Test")
 			{
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 1, 0, 0, 0, 'A'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 2, 0, 0, 0, 'B'),
-				new AnswerKeyQuestionAnswer(1, "Test", 1, 3, 0, 0, 0, 'C'),
+				Answers = new List<AnswerKeyQuestionAnswer>()
+				{
+					new AnswerKeyQuestionAnswer(1, 0, 0, 0, 'A'),
+					new AnswerKeyQuestionAnswer(2, 0, 0, 0, 'B'),
+					new AnswerKeyQuestionAnswer(3, 0, 0, 0, 'C'),
+				}
 			});
 			var studentForm = new StudentOpticalForm();
-			studentForm.Sections.Add(new StudentOpticalFormSection("Test", 1));
+			studentForm.Sections.Add(new StudentOpticalFormSection(1, "Test"));
 			Action act = () => studentForm.Evaluate(answerKeyOpticalForm);
 			act.Should().Throw<ArgumentNullException>()
 				.And
@@ -268,7 +265,7 @@
 				IncorrectEliminationRate = 4,
 			};
 			var studentForm = new StudentOpticalForm();
-			studentForm.Sections.Add(new StudentOpticalFormSection("Test", 1));
+			studentForm.Sections.Add(new StudentOpticalFormSection(1, "Test"));
 			Action act = () => studentForm.Evaluate(answerKeyOpticalForm);
 			act.Should().Throw<ArgumentNullException>()
 				.And
@@ -287,16 +284,19 @@
 			return list;
 		}
 
-		private IEnumerable<AnswerKeyQuestionAnswer> CreateAnswerKeyQuestionAnswers(int lessonId, string lessonName, int count)
+		private AnswerKeyOpticalFormSection CreateSection(int lessonId, string lessonName, int count)
 		{
 			var list = new List<AnswerKeyQuestionAnswer>();
 
 			for (var i = 0; i < count; i++)
 			{
-				list.Add(new AnswerKeyQuestionAnswer(lessonId, lessonName, lessonId, i + 1, 0, 0, 0, 'A'));
+				list.Add(new AnswerKeyQuestionAnswer(i + 1, 0, 0, 0, 'A'));
 			}
 
-			return list;
+			return new AnswerKeyOpticalFormSection(lessonId, lessonName)
+			{
+				Answers = list
+			};
 		}
 	}
 }

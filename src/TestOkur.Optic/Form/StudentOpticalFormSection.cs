@@ -1,14 +1,13 @@
 ﻿namespace TestOkur.Optic.Form
 {
 	using System;
-
 	using System.Collections.Generic;
 	using System.Linq;
 	using TestOkur.Optic.Answer;
 
-	public class StudentOpticalFormSection
+	public class StudentOpticalFormSection : FormLessonSection
 	{
-		public StudentOpticalFormSection(string lessonName, int lessonId)
+		public StudentOpticalFormSection(int lessonId, string lessonName)
 		 : this()
 		{
 			LessonName = lessonName;
@@ -22,10 +21,6 @@
 
 		public List<QuestionAnswer> Answers { get; set; }
 
-		public string LessonName { get; set; }
-
-		public int LessonId { get; set; }
-
 		public int EmptyCount { get; set; }
 
 		public int WrongCount { get; set; }
@@ -36,8 +31,12 @@
 
 		public float SuccessPercent => Answers.Count == 0 ? 0 : Net / Answers.Count * 100;
 
-		public void Evaluate(IList<AnswerKeyQuestionAnswer> answerKeyQuestionAnswers, int incorrectEliminationRate)
+		public void Evaluate(AnswerKeyOpticalForm answerKeyOpticalForm, int incorrectEliminationRate)
 		{
+			var answerKeyQuestionAnswers = answerKeyOpticalForm
+				.Sections
+				.FirstOrDefault(s => s.LessonName == LessonName)
+				?.Answers;
 			Validate(answerKeyQuestionAnswers);
 			SetCorrectAnswers(answerKeyQuestionAnswers);
 			CalculateResult(incorrectEliminationRate);
@@ -63,7 +62,7 @@
 		{
 			foreach (var answer in answerKeyQuestionAnswers)
 			{
-				Answers.First(a => $"{LessonName}_{a.QuestionNo}" == answer.Key)
+				Answers.First(a => a.QuestionNo == answer.QuestionNo)
 					.SetCorrectAnswer(answer);
 			}
 		}

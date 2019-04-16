@@ -77,11 +77,7 @@
 
 			foreach (var section in Sections)
 			{
-				var answers = answerKeyOpticalForm?
-					.Answers
-					?.Where(a => a.LessonName == section.LessonName)
-					.ToList();
-				section.Evaluate(answers, answerKeyOpticalForm.IncorrectEliminationRate);
+				section.Evaluate(answerKeyOpticalForm, answerKeyOpticalForm.IncorrectEliminationRate);
 			}
 
 			CalculateScore(answerKeyOpticalForm);
