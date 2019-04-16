@@ -1,8 +1,8 @@
-$projectFile = "src\TestOkur.Infrastructure\TestOkur.Infrastructure.csproj"
-$sonarQubeId = "NazmiAltun_TestOkur.Infrastructure"
-$github = "NazmiAltun/TestOkur.Infrastructure"
+$projectFile = "src\TestOkur.Optic\TestOkur.Optic.csproj"
+$sonarQubeId = "NazmiAltun_TestOkur.Optic"
+$github = "NazmiAltun/TestOkur.Optic"
 $baseBranch = "master"
-$framework = "netcoreapp2.1"
+$framework = "netcoreapp2.2"
 $sonarOrg = "nazmialtun-github"
 $sonarToken = "bb48ce419887374c832debe93ea0ee5b9d29914d"
 
