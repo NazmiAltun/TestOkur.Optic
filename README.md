@@ -4,6 +4,6 @@
 [![](https://sonarcloud.io/api/project_badges/measure?project=NazmiAltun_TestOkur.Infrastructure&metric=alert_status)](https://sonarcloud.io/project/issues?id=NazmiAltun_TestOkur.Infrastructure&resolved=false&types=alert_status) 
 [![](https://sonarcloud.io/api/project_badges/measure?project=NazmiAltun_TestOkur.Infrastructure&metric=code_smells)](https://sonarcloud.io/project/issues?id=NazmiAltun_TestOkur.Infrastructure&resolved=false&types=CODE_SMELL) 
 
-# TestOkur.Infrastructure
+# TestOkur.Optic
 
-Shared infrastructure code
+TestOkur client/server shared library
