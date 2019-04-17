@@ -73,14 +73,8 @@
 
 				for (var i = 0; i < answerKeyOpticalFormSection.MaxQuestionCount; i++)
 				{
-					var correctAnswer = answerKeyOpticalFormSection
-						.Answers.ElementAtOrDefault(i);
-
-					var questionAnswer = new QuestionAnswer(
-						i + 1,
-						scanOutput.Next(),
-						correctAnswer?.SubjectId ?? default,
-						correctAnswer?.SubjectName);
+					var correctAnswer = answerKeyOpticalFormSection.Answers.ElementAtOrDefault(i);
+					var questionAnswer = new QuestionAnswer(i + 1, scanOutput.Next());
 					questionAnswer.SetCorrectAnswer(correctAnswer);
 					studentOpticalFormSection.Answers.Add(questionAnswer);
 				}
@@ -125,14 +119,10 @@
 
 			foreach (var formula in scoreFormulas)
 			{
-				var score = formula.BasePoint;
-
-				foreach (var lessonCoefficient in formula.Coefficients)
-				{
-					score += lessonCoefficient.Coefficient *
-							 Sections.FirstOrDefault(s => s.LessonName == lessonCoefficient.Lesson)?.Net ?? 0;
-				}
-
+				var score = formula.BasePoint +
+							formula.Coefficients
+								.Select(c => c.Coefficient * Sections.FirstOrDefault(s => s.LessonName == c.Lesson)?.Net ?? 0)
+								.Sum();
 				Scores.Add(formula.ScoreName, (float)Round(score * 100) / 100);
 			}
 		}

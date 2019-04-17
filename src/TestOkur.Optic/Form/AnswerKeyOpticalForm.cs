@@ -48,13 +48,7 @@
 
 		public List<AnswerKeyOpticalForm> Expand()
 		{
-			var formDictionary = new Dictionary<char, AnswerKeyOpticalForm>()
-			{
-				{ 'A', new AnswerKeyOpticalForm(this, 'A') },
-				{ 'B', new AnswerKeyOpticalForm(this, 'B') },
-				{ 'C', new AnswerKeyOpticalForm(this, 'C') },
-				{ 'D', new AnswerKeyOpticalForm(this, 'D') },
-			};
+			var formDictionary = CreateFormsForAllBooklets();
 
 			foreach (var section in Sections)
 			{
@@ -68,6 +62,18 @@
 			}
 
 			return formDictionary.Values.Where(a => !a.Empty).ToList();
+		}
+
+		private Dictionary<char, AnswerKeyOpticalForm> CreateFormsForAllBooklets()
+		{
+			var formDictionary = new Dictionary<char, AnswerKeyOpticalForm>()
+			{
+				{ 'A', new AnswerKeyOpticalForm(this, 'A') },
+				{ 'B', new AnswerKeyOpticalForm(this, 'B') },
+				{ 'C', new AnswerKeyOpticalForm(this, 'C') },
+				{ 'D', new AnswerKeyOpticalForm(this, 'D') },
+			};
+			return formDictionary;
 		}
 	}
 }

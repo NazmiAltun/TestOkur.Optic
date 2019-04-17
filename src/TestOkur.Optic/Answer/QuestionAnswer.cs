@@ -47,6 +47,9 @@
 				return;
 			}
 
+			SubjectId = answerKeyQuestionAnswer.SubjectId;
+			SubjectName = answerKeyQuestionAnswer.SubjectName;
+
 			if (answerKeyQuestionAnswer.QuestionAnswerCancelAction == QuestionAnswerCancelAction.CorrectForAll)
 			{
 				Result = QuestionAnswerResult.Correct;

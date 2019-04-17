@@ -4,7 +4,7 @@
 
 	public abstract class OpticalForm
 	{
-		public OpticalForm()
+		protected OpticalForm()
 		{
 			CreateDateTimeUtc = DateTime.UtcNow;
 		}
