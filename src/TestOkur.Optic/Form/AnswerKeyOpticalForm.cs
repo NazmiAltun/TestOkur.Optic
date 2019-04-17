@@ -32,7 +32,7 @@
 
 		public List<AnswerKeyOpticalFormSection> Sections { get; set; }
 
-		public List<AnswerKeyQuestionAnswer> Answers => Sections.SelectMany(s => s.Answers).ToList();
+		public IReadOnlyList<AnswerKeyQuestionAnswer> Answers => Sections.SelectMany(s => s.Answers).ToList();
 
 		public List<ScoreFormula> ScoreFormulas { get; set; }
 
