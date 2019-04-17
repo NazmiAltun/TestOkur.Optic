@@ -1,6 +1,5 @@
 ﻿namespace TestOkur.Optic.Form
 {
-	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using TestOkur.Optic.Answer;
@@ -29,16 +28,12 @@
 
 		public float Net { get; set; }
 
-		public float SuccessPercent => Answers.Count == 0 ? 0 : Net / Answers.Count * 100;
+		public float SuccessPercent => AnswerCount == 0 ? 0 : Net / AnswerCount * 100;
 
-		public void Evaluate(AnswerKeyOpticalForm answerKeyOpticalForm, int incorrectEliminationRate)
+		private int AnswerCount => Answers.Count(a => a.Result != QuestionAnswerResult.NoResult);
+
+		public void Evaluate(int incorrectEliminationRate)
 		{
-			var answerKeyQuestionAnswers = answerKeyOpticalForm
-				.Sections
-				.FirstOrDefault(s => s.LessonName == LessonName)
-				?.Answers;
-			Validate(answerKeyQuestionAnswers);
-			SetCorrectAnswers(answerKeyQuestionAnswers);
 			CalculateResult(incorrectEliminationRate);
 		}
 
@@ -56,28 +51,6 @@
 			Net = incorrectEliminationRate == 0
 				? CorrectCount
 				: CorrectCount - ((float)WrongCount / incorrectEliminationRate);
-		}
-
-		private void SetCorrectAnswers(IEnumerable<AnswerKeyQuestionAnswer> answerKeyQuestionAnswers)
-		{
-			foreach (var answer in answerKeyQuestionAnswers)
-			{
-				Answers.First(a => a.QuestionNo == answer.QuestionNo)
-					.SetCorrectAnswer(answer);
-			}
-		}
-
-		private void Validate(IEnumerable<AnswerKeyQuestionAnswer> answerKeyQuestionAnswers)
-		{
-			if (answerKeyQuestionAnswers == null || !answerKeyQuestionAnswers.Any())
-			{
-				throw new ArgumentNullException(nameof(answerKeyQuestionAnswers));
-			}
-
-			if (Answers == null || !Answers.Any())
-			{
-				throw new ArgumentNullException(nameof(Answers));
-			}
 		}
 	}
 }

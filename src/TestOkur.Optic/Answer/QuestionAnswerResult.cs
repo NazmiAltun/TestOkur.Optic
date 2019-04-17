@@ -2,9 +2,10 @@
 {
 	public enum QuestionAnswerResult
 	{
-		Wrong = 0,
-		Correct = 1,
-		Empty = 2,
-		Invalid = 3
+		NoResult = 0,
+		Wrong = 1,
+		Correct = 2,
+		Empty = 3,
+		Invalid = 4
 	}
 }

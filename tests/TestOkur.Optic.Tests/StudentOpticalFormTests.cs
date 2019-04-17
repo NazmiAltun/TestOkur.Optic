@@ -12,7 +12,7 @@
 	public class StudentOpticalFormTests
 	{
 		[Fact]
-		public void Given_AddSections_When_SectionsExist_Then_Sections_ShouldBeReplaced()
+		public void Given_AddSections_When_SectionsExist_Then_Sections_ShouldBeOverriden()
 		{
 			var form = new StudentOpticalForm()
 			{
@@ -125,31 +125,11 @@
 			answerKeyOpticalForm.AddSection(CreateSection(2, "Math", 15));
 			answerKeyOpticalForm.AddSection(CreateSection(3, "Science", 10));
 			answerKeyOpticalForm.AddSection(CreateSection(4, "Social Science", 8));
+			var answers = Enumerable.Repeat('A', 48);
+			var studentForm = new StudentOpticalForm('A');
+			studentForm.SetFromScanOutput(new ScanOutput(answers, 0, 'A'), answerKeyOpticalForm);
 
-			var studentForm = new StudentOpticalForm()
-			{
-				Booklet = 'A',
-				Sections = new List<StudentOpticalFormSection>()
-				{
-					new StudentOpticalFormSection(1, "Tr")
-					{
-						Answers = CreateQuestionAnswers(15)
-					},
-					new StudentOpticalFormSection(2, "Math")
-					{
-						Answers = CreateQuestionAnswers(15)
-					},
-					new StudentOpticalFormSection(3, "Science")
-					{
-						Answers = CreateQuestionAnswers(10)
-					},
-					new StudentOpticalFormSection(4, "Social Science")
-					{
-						Answers = CreateQuestionAnswers(8)
-					},
-				}
-			};
-			studentForm.Evaluate(answerKeyOpticalForm);
+			studentForm.Evaluate(answerKeyOpticalForm.IncorrectEliminationRate, answerKeyOpticalForm.ScoreFormulas);
 			studentForm.Net.Should().Be(48);
 			studentForm.Score.Should().Be(337.58f);
 		}
@@ -164,6 +144,7 @@
 			};
 			answerKeyOpticalForm.AddSection(new AnswerKeyOpticalFormSection(1, "Test")
 			{
+				MaxQuestionCount = 20,
 				Answers = new List<AnswerKeyQuestionAnswer>()
 				{
 					new AnswerKeyQuestionAnswer(1, 0, 0, 0, 'A'),
@@ -184,104 +165,15 @@
 				}
 			});
 
-			var studentForm = new StudentOpticalForm()
-			{
-				Booklet = 'A',
-				Sections = new List<StudentOpticalFormSection>()
-				{
-					new StudentOpticalFormSection(1, "Test")
-					{
-						Answers = new List<QuestionAnswer>()
-						{
-							new QuestionAnswer(1, 'A'),
-							new QuestionAnswer(2, 'A'),
-							new QuestionAnswer(3, 'A'),
-							new QuestionAnswer(4, 'A'),
-							new QuestionAnswer(5, 'A'),
-							new QuestionAnswer(6, 'A'),
-							new QuestionAnswer(7, 'G'),
-							new QuestionAnswer(8, ' '),
-							new QuestionAnswer(9, 'A'),
-							new QuestionAnswer(10, 'A'),
-							new QuestionAnswer(11, 'A'),
-							new QuestionAnswer(12, ' '),
-							new QuestionAnswer(13, 'A'),
-							new QuestionAnswer(14, 'A'),
-							new QuestionAnswer(15, 'A')
-						}
-					}
-				}
-			};
-			studentForm.Evaluate(answerKeyOpticalForm);
+			var studentForm = new StudentOpticalForm('A');
+			studentForm.SetFromScanOutput(new ScanOutput("AAAAAAG AAA AAA    ", 0, 'A'), answerKeyOpticalForm);
+			studentForm.Evaluate(answerKeyOpticalForm.IncorrectEliminationRate, answerKeyOpticalForm.ScoreFormulas);
 			studentForm.CorrectCount.Should().Be(5);
 			studentForm.WrongCount.Should().Be(8);
 			studentForm.EmptyCount.Should().Be(2);
 			studentForm.Net.Should().Be(3);
 			studentForm.SuccessPercent.Should().Be(20);
 			studentForm.Score.Should().Be(20);
-		}
-
-		[Fact]
-		public void Given_Evaluate_WhenStudentFormAnswersEmpty_ThenDomainExceptionIsThrown()
-		{
-			var answerKeyOpticalForm = new AnswerKeyOpticalForm
-			{
-				Booklet = 'A',
-				ExamDate = DateTime.UtcNow.AddDays(-10),
-				ExamId = 10,
-				ExamName = "Test",
-				IncorrectEliminationRate = 4,
-			};
-			answerKeyOpticalForm.AddSection(new AnswerKeyOpticalFormSection(1, "Test")
-			{
-				Answers = new List<AnswerKeyQuestionAnswer>()
-				{
-					new AnswerKeyQuestionAnswer(1, 0, 0, 0, 'A'),
-					new AnswerKeyQuestionAnswer(2, 0, 0, 0, 'B'),
-					new AnswerKeyQuestionAnswer(3, 0, 0, 0, 'C'),
-				}
-			});
-			var studentForm = new StudentOpticalForm();
-			studentForm.Sections.Add(new StudentOpticalFormSection(1, "Test"));
-			Action act = () => studentForm.Evaluate(answerKeyOpticalForm);
-			act.Should().Throw<ArgumentNullException>()
-				.And
-				.ParamName.Should().Be("Answers");
-			studentForm.Sections.First().Answers = null;
-			act.Should().Throw<ArgumentNullException>()
-				.And
-				.ParamName.Should().Be("Answers");
-		}
-
-		[Fact]
-		public void Given_Evaluate_WhenAnswerKeyFormAnswersEmpty_ThenDomainExceptionIsThrown()
-		{
-			var answerKeyOpticalForm = new AnswerKeyOpticalForm
-			{
-				Booklet = 'A',
-				ExamDate = DateTime.UtcNow.AddDays(-10),
-				ExamId = 10,
-				ExamName = "Test",
-				IncorrectEliminationRate = 4,
-			};
-			var studentForm = new StudentOpticalForm();
-			studentForm.Sections.Add(new StudentOpticalFormSection(1, "Test"));
-			Action act = () => studentForm.Evaluate(answerKeyOpticalForm);
-			act.Should().Throw<ArgumentNullException>()
-				.And
-				.ParamName.Should().Be("answerKeyQuestionAnswers");
-		}
-
-		private List<QuestionAnswer> CreateQuestionAnswers(int count)
-		{
-			var list = new List<QuestionAnswer>();
-
-			for (var i = 0; i < count; i++)
-			{
-				list.Add(new QuestionAnswer(i + 1, 'A'));
-			}
-
-			return list;
 		}
 
 		private AnswerKeyOpticalFormSection CreateSection(int lessonId, string lessonName, int count)
@@ -295,6 +187,7 @@
 
 			return new AnswerKeyOpticalFormSection(lessonId, lessonName)
 			{
+				MaxQuestionCount = count,
 				Answers = list
 			};
 		}

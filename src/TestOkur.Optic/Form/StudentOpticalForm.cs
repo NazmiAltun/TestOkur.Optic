@@ -3,10 +3,18 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using TestOkur.Optic.Answer;
+	using TestOkur.Optic.Score;
 	using static System.Math;
 
 	public class StudentOpticalForm : OpticalForm
 	{
+		public StudentOpticalForm(char booklet)
+			: this()
+		{
+			Booklet = booklet;
+		}
+
 		public StudentOpticalForm()
 		{
 			Sections = new List<StudentOpticalFormSection>();
@@ -55,6 +63,32 @@
 
 		public float Score => Scores.Any() ? Scores.First().Value : SuccessPercent;
 
+		public void SetFromScanOutput(ScanOutput scanOutput, AnswerKeyOpticalForm answerKeyOpticalForm)
+		{
+			foreach (var answerKeyOpticalFormSection in answerKeyOpticalForm
+				.Sections
+				.Where(s => s.FormPart == scanOutput.FormPart))
+			{
+				var studentOpticalFormSection = new StudentOpticalFormSection(answerKeyOpticalFormSection.LessonId, answerKeyOpticalFormSection.LessonName);
+
+				for (var i = 0; i < answerKeyOpticalFormSection.MaxQuestionCount; i++)
+				{
+					var correctAnswer = answerKeyOpticalFormSection
+						.Answers.ElementAtOrDefault(i);
+
+					var questionAnswer = new QuestionAnswer(
+						i + 1,
+						scanOutput.Next(),
+						correctAnswer?.SubjectId ?? default,
+						correctAnswer?.SubjectName);
+					questionAnswer.SetCorrectAnswer(correctAnswer);
+					studentOpticalFormSection.Answers.Add(questionAnswer);
+				}
+
+				Sections.Add(studentOpticalFormSection);
+			}
+		}
+
 		public void AddSections(IEnumerable<StudentOpticalFormSection> sections)
 		{
 			Sections = Sections
@@ -68,29 +102,28 @@
 			}
 		}
 
-		public void Evaluate(AnswerKeyOpticalForm answerKeyOpticalForm)
+		public void Evaluate(int incorrectEliminationRate, List<ScoreFormula> scoreFormulas)
 		{
-			if (answerKeyOpticalForm == null)
-			{
-				throw new ArgumentNullException(nameof(answerKeyOpticalForm));
-			}
-
-			foreach (var section in Sections)
-			{
-				section.Evaluate(answerKeyOpticalForm, answerKeyOpticalForm.IncorrectEliminationRate);
-			}
-
-			CalculateScore(answerKeyOpticalForm);
+			EvaluateSections(incorrectEliminationRate);
+			CalculateScore(scoreFormulas);
 		}
 
-		private void CalculateScore(AnswerKeyOpticalForm answerKeyOpticalForm)
+		private void EvaluateSections(int incorrectEliminationRate)
 		{
-			if (answerKeyOpticalForm.ScoreFormulas == null)
+			foreach (var section in Sections)
+			{
+				section.Evaluate(incorrectEliminationRate);
+			}
+		}
+
+		private void CalculateScore(List<ScoreFormula> scoreFormulas)
+		{
+			if (scoreFormulas == null)
 			{
 				return;
 			}
 
-			foreach (var formula in answerKeyOpticalForm.ScoreFormulas)
+			foreach (var formula in scoreFormulas)
 			{
 				var score = formula.BasePoint;
 
