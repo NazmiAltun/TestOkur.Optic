@@ -107,10 +107,8 @@
 				IncorrectEliminationRate = 0,
 				ScoreFormulas = new List<ScoreFormula>()
 				{
-					new ScoreFormula()
+					new ScoreFormula(175, "Scholarship")
 					{
-						BasePoint = 175,
-						ScoreName = "Scholarship",
 						Coefficients = new List<LessonCoefficient>()
 						{
 							new LessonCoefficient("Tr", 4.33f),

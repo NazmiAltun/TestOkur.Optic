@@ -3,27 +3,19 @@
 	using System.Collections.Generic;
 	using System.Diagnostics;
 
-	[DebuggerDisplay("{FormulaType}-{ScoreName}")]
+	[DebuggerDisplay("{ScoreName}")]
 	public class ScoreFormula
 	{
-		public ScoreFormula()
+		public ScoreFormula(float basePoint, string scoreName)
 		{
+			BasePoint = basePoint;
+			ScoreName = scoreName;
 			Coefficients = new List<LessonCoefficient>();
 		}
 
-		public int Id { get; set; }
+		public float BasePoint { get; }
 
-		public float BasePoint { get; set; }
-
-		public int Grade { get; set; }
-
-		public int FormulaTypeId { get; set; }
-
-		public string FormulaType { get; set; }
-
-		public string ScoreName { get; set; }
-
-		public int ExamId { get; set; }
+		public string ScoreName { get; }
 
 		public List<LessonCoefficient> Coefficients { get; set; }
 	}
