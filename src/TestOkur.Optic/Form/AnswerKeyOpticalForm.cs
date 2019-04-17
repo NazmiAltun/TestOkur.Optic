@@ -7,6 +7,13 @@
 
 	public class AnswerKeyOpticalForm : OpticalForm
 	{
+		public AnswerKeyOpticalForm(char booklet, List<ScoreFormula> scoreFormulas)
+			: this()
+		{
+			Booklet = booklet;
+			ScoreFormulas = ScoreFormulas;
+		}
+
 		public AnswerKeyOpticalForm()
 		{
 			Sections = new List<AnswerKeyOpticalFormSection>();
