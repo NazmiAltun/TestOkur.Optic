@@ -63,12 +63,16 @@
 
 			var forms = form.Expand();
 			forms.Should().Contain(f => f.Booklet == 'A' &&
+										f.Sections.Count == 1 &&
 										string.Join(",", f.Answers.Select(a => a.Answer).ToArray()) == "A,B,C,D,A,C,B,A");
 			forms.Should().Contain(f => f.Booklet == 'B' &&
+			                            f.Sections.Count == 1 &&
 										string.Join(",", f.Answers.Select(a => a.Answer).ToArray()) == "D,A,B,C,A,A,C,B");
 			forms.Should().Contain(f => f.Booklet == 'C' &&
+			                            f.Sections.Count == 1 &&
 										string.Join(",", f.Answers.Select(a => a.Answer).ToArray()) == "C,D,A,B,B,A,A,C");
 			forms.Should().Contain(f => f.Booklet == 'D' &&
+			                            f.Sections.Count == 1 &&
 										string.Join(",", f.Answers.Select(a => a.Answer).ToArray()) == "B,C,D,A,C,B,A,A");
 		}
 	}
