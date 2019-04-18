@@ -1,6 +1,5 @@
 ﻿namespace TestOkur.Optic.Tests
 {
-	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using FluentAssertions;
@@ -140,9 +139,8 @@
 				Booklet = 'A',
 				IncorrectEliminationRate = 4,
 			};
-			answerKeyOpticalForm.AddSection(new AnswerKeyOpticalFormSection(1, "Test")
+			answerKeyOpticalForm.AddSection(new AnswerKeyOpticalFormSection(1, "Test", 20, default, default)
 			{
-				MaxQuestionCount = 20,
 				Answers = new List<AnswerKeyQuestionAnswer>()
 				{
 					new AnswerKeyQuestionAnswer(1, 0, 0, 0, 'A'),
@@ -183,9 +181,8 @@
 				list.Add(new AnswerKeyQuestionAnswer(i + 1, 0, 0, 0, 'A'));
 			}
 
-			return new AnswerKeyOpticalFormSection(lessonId, lessonName)
+			return new AnswerKeyOpticalFormSection(lessonId, lessonName, count, default, default)
 			{
-				MaxQuestionCount = count,
 				Answers = list
 			};
 		}

@@ -16,6 +16,19 @@
 			FormPart = answerKeyOpticalFormSection.FormPart;
 		}
 
+		public AnswerKeyOpticalFormSection(
+			int lessonId,
+			string lessonName,
+			int maxQuestionCount,
+			int formPart,
+			int listOrder)
+			: this(lessonId, lessonName)
+		{
+			MaxQuestionCount = maxQuestionCount;
+			FormPart = formPart;
+			ListOrder = listOrder;
+		}
+
 		public AnswerKeyOpticalFormSection(int lessonId, string lessonName)
 		 : this()
 		{

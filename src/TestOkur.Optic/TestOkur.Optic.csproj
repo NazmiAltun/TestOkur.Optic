@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
-	<AssemblyVersion>1.0.7.0</AssemblyVersion>
+	<AssemblyVersion>1.0.8.0</AssemblyVersion>
 	<CodeAnalysisRuleSet>..\..\StyleCopRules.ruleset</CodeAnalysisRuleSet>
-    <Version>1.0.7</Version>
+    <Version>1.0.8</Version>
     <Copyright>Nazmi Altun</Copyright>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/NazmiAltun/TestOkur.Optic</RepositoryUrl>
-    <FileVersion>1.0.7.0</FileVersion>
+    <FileVersion>1.0.8.0</FileVersion>
     <LangVersion>latest</LangVersion>
 	<ProjectGuid>{B08153AD-88D7-4588-ADF3-88241119EC4E}</ProjectGuid>
-	<PackageReleaseNotes>6</PackageReleaseNotes>
+	<PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="$(SolutionDir)\stylecop.json" Link="stylecop.json" />

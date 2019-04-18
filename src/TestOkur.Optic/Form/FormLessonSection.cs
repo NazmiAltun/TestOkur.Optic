@@ -6,9 +6,9 @@
 
 		public string LessonName { get; protected set; }
 
-		public int MaxQuestionCount { get; set; }
+		public int MaxQuestionCount { get; protected set; }
 
-		public int FormPart { get; set; }
+		public int FormPart { get; protected set; }
 
 		public int ListOrder { get; protected set; }
 
