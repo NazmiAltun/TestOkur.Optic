@@ -13,7 +13,7 @@
 			: this()
 		{
 			Booklet = booklet;
-			ScoreFormulas = ScoreFormulas;
+			ScoreFormulas = scoreFormulas;
 		}
 
 		public AnswerKeyOpticalForm()

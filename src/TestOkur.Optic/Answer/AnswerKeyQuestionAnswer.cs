@@ -8,6 +8,14 @@
 
 		public AnswerKeyQuestionAnswer(
 			int questionNo,
+			char answer)
+		{
+			QuestionNo = questionNo;
+			Answer = answer;
+		}
+
+		public AnswerKeyQuestionAnswer(
+			int questionNo,
 			QuestionAnswer questionAnswer)
 		{
 			QuestionNo = questionNo;

@@ -59,7 +59,9 @@
 
 		public float Net => Sections.Select(s => s.Net).Sum();
 
-		public float SuccessPercent => Sections.Select(s => s.SuccessPercent).Average();
+		public float SuccessPercent => (float)Round(
+			                               Sections.Select(s => s.SuccessPercent).Average() *
+			                               100) / 100;
 
 		public float Score => Scores.Any() ? Scores.First().Value : SuccessPercent;
 
