@@ -2,9 +2,11 @@
 {
 	using System.Collections.Generic;
 	using System.Linq;
+	using System.Runtime.Serialization;
 	using TestOkur.Optic.Answer;
 	using TestOkur.Optic.Score;
 
+	[DataContract]
 	public class AnswerKeyOpticalForm : OpticalForm
 	{
 		public AnswerKeyOpticalForm(char booklet, List<ScoreFormula> scoreFormulas)

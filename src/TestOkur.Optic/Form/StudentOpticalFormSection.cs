@@ -2,8 +2,10 @@
 {
 	using System.Collections.Generic;
 	using System.Linq;
+	using System.Runtime.Serialization;
 	using TestOkur.Optic.Answer;
 
+	[DataContract]
 	public class StudentOpticalFormSection : FormLessonSection
 	{
 		public StudentOpticalFormSection(int lessonId, string lessonName)
