@@ -19,16 +19,22 @@
 			Booklet = booklet;
 		}
 
+		[DataMember]
 		public string Id { get; set; }
 
+		[DataMember]
 		public int ExamId { get; set; }
 
+		[DataMember]
 		public DateTime ExamDate { get; set; }
 
+		[DataMember]
 		public string ExamName { get; set; }
 
+		[DataMember]
 		public char Booklet { get; set; }
 
+		[DataMember]
 		public DateTime CreateDateTimeUtc { get; set; }
 	}
 }

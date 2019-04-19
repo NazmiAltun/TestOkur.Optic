@@ -23,12 +23,16 @@
 		[DataMember]
 		public List<QuestionAnswer> Answers { get; set; }
 
+		[DataMember]
 		public int EmptyCount { get; set; }
 
+		[DataMember]
 		public int WrongCount { get; set; }
 
+		[DataMember]
 		public int CorrectCount { get; set; }
 
+		[DataMember]
 		public float Net { get; set; }
 
 		public float SuccessPercent => AnswerCount == 0 ? 0 : Net / AnswerCount * 100;

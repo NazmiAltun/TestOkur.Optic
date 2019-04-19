@@ -23,6 +23,7 @@
 			Scores = new Dictionary<string, float>();
 		}
 
+		[DataMember]
 		public int StudentId { get; set; }
 
 		[DataMember]
@@ -31,26 +32,37 @@
 		[DataMember]
 		public Dictionary<string, float> Scores { get; }
 
+		[DataMember]
 		public Guid ScanSessionReportId { get; set; }
 
+		[DataMember]
 		public int StudentNumber { get; set; }
 
+		[DataMember]
 		public string StudentFirstName { get; set; }
 
+		[DataMember]
 		public string StudentLastName { get; set; }
 
+		[DataMember]
 		public string SchoolName { get; set; }
 
+		[DataMember]
 		public int ClassroomId { get; set; }
 
+		[DataMember]
 		public string Classroom { get; set; }
 
+		[DataMember]
 		public string CityName { get; set; }
 
+		[DataMember]
 		public int CityId { get; set; }
 
+		[DataMember]
 		public string DistrictName { get; set; }
 
+		[DataMember]
 		public int DistrictId { get; set; }
 
 		public int EmptyCount => Sections.Select(s => s.EmptyCount).Sum();

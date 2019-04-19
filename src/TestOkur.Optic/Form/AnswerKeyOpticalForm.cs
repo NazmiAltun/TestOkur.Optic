@@ -30,6 +30,7 @@
 
 		public bool Empty => Sections.SelectMany(s => s.Answers).All(a => a.QuestionNo == default);
 
+		[DataMember]
 		public int IncorrectEliminationRate { get; set; }
 
 		[DataMember]
@@ -37,6 +38,7 @@
 
 		public IReadOnlyList<AnswerKeyQuestionAnswer> Answers => Sections.SelectMany(s => s.Answers).ToList();
 
+		[DataMember]
 		public List<ScoreFormula> ScoreFormulas { get; set; }
 
 		public void AddSection(AnswerKeyOpticalFormSection section)
