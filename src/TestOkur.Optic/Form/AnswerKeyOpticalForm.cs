@@ -32,6 +32,7 @@
 
 		public int IncorrectEliminationRate { get; set; }
 
+		[DataMember]
 		public List<AnswerKeyOpticalFormSection> Sections { get; set; }
 
 		public IReadOnlyList<AnswerKeyQuestionAnswer> Answers => Sections.SelectMany(s => s.Answers).ToList();

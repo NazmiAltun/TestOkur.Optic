@@ -1,7 +1,9 @@
 ﻿namespace TestOkur.Optic.Form
 {
 	using System;
+	using System.Runtime.Serialization;
 
+	[DataContract]
 	public abstract class OpticalForm
 	{
 		protected OpticalForm()

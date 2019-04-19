@@ -43,6 +43,7 @@
 			Answers = new List<AnswerKeyQuestionAnswer>();
 		}
 
+		[DataMember]
 		public List<AnswerKeyQuestionAnswer> Answers { get; set; }
 
 		public void AddAnswer(AnswerKeyQuestionAnswer answerKeyQuestionAnswer)
