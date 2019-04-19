@@ -20,6 +20,7 @@
 			Answers = new List<QuestionAnswer>();
 		}
 
+		[DataMember]
 		public List<QuestionAnswer> Answers { get; set; }
 
 		public int EmptyCount { get; set; }

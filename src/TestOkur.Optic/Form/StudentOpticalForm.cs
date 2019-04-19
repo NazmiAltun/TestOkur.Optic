@@ -3,10 +3,12 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using System.Runtime.Serialization;
 	using TestOkur.Optic.Answer;
 	using TestOkur.Optic.Score;
 	using static System.Math;
 
+	[DataContract]
 	public class StudentOpticalForm : OpticalForm
 	{
 		public StudentOpticalForm(char booklet)
@@ -23,8 +25,10 @@
 
 		public int StudentId { get; set; }
 
+		[DataMember]
 		public List<StudentOpticalFormSection> Sections { get; set; }
 
+		[DataMember]
 		public Dictionary<string, float> Scores { get; }
 
 		public Guid ScanSessionReportId { get; set; }
