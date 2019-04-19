@@ -78,5 +78,7 @@
 
 			Result = CorrectAnswer == Answer ? QuestionAnswerResult.Correct : QuestionAnswerResult.Wrong;
 		}
+
+		public override string ToString() => Answer.ToString();
 	}
 }

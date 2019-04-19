@@ -124,7 +124,7 @@
 			answerKeyOpticalForm.AddSection(CreateSection(4, "Social Science", 8));
 			var answers = Enumerable.Repeat('A', 48);
 			var studentForm = new StudentOpticalForm('A');
-			studentForm.SetFromScanOutput(new ScanOutput(answers, 0, 'A'), answerKeyOpticalForm);
+			studentForm.SetFromScanOutput(new ScanOutput(answers, 0), answerKeyOpticalForm);
 
 			studentForm.Evaluate(answerKeyOpticalForm.IncorrectEliminationRate, answerKeyOpticalForm.ScoreFormulas);
 			studentForm.Net.Should().Be(48);
@@ -162,7 +162,7 @@
 			});
 
 			var studentForm = new StudentOpticalForm('A');
-			studentForm.SetFromScanOutput(new ScanOutput("AAAAAAG AAA AAA    ", 0, 'A'), answerKeyOpticalForm);
+			studentForm.SetFromScanOutput(new ScanOutput("AAAAAAG AAA AAA    ", 0), answerKeyOpticalForm);
 			studentForm.Evaluate(answerKeyOpticalForm.IncorrectEliminationRate, answerKeyOpticalForm.ScoreFormulas);
 			studentForm.CorrectCount.Should().Be(5);
 			studentForm.WrongCount.Should().Be(8);

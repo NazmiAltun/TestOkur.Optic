@@ -40,8 +40,8 @@
 			});
 
 			var studentForm = new StudentOpticalForm('A');
-			studentForm.SetFromScanOutput(new ScanOutput("CE EEE       C   EA DAE  ADEBEDEDCADEBAEDBE     D  B DEAEAAA", 1, 'A'), answerKeyForm);
-			studentForm.SetFromScanOutput(new ScanOutput("CB                                      A     CE  D         ", 2, 'A'), answerKeyForm);
+			studentForm.SetFromScanOutput(new ScanOutput("CE EEE       C   EA DAE  ADEBEDEDCADEBAEDBE     D  B DEAEAAA", 1), answerKeyForm);
+			studentForm.SetFromScanOutput(new ScanOutput("CB                                      A     CE  D         ", 2), answerKeyForm);
 			studentForm.Evaluate(4, answerKeyForm.ScoreFormulas);
 			studentForm.Net.Should().Be(15.25f);
 			studentForm.Score.Should().Be(150.83f);

@@ -7,7 +7,7 @@
 	{
 		private int _index;
 
-		public ScanOutput(IEnumerable<char> answers, int formPart, char booklet)
+		public ScanOutput(IEnumerable<char> answers, int formPart)
 		{
 			Answers = answers.ToArray();
 			FormPart = formPart;
