@@ -23,6 +23,9 @@
 		public string Id { get; set; }
 
 		[DataMember]
+		public int UserId { get; set; }
+
+		[DataMember]
 		public int ExamId { get; set; }
 
 		[DataMember]
