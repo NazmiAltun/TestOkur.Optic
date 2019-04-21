@@ -9,7 +9,7 @@
 	using static System.Math;
 
 	[DataContract]
-	public class StudentOpticalForm : OpticalForm
+	public class StudentOpticalForm : OpticalForm<StudentOpticalFormSection>
 	{
 		public StudentOpticalForm(char booklet)
 			: this()
@@ -27,7 +27,7 @@
 		public int StudentId { get; set; }
 
 		[DataMember]
-		public List<StudentOpticalFormSection> Sections { get; set; }
+		public override List<StudentOpticalFormSection> Sections { get; set; }
 
 		[DataMember]
 		public Dictionary<string, float> Scores { get; }

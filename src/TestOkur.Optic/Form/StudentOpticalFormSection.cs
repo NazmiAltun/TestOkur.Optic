@@ -39,7 +39,7 @@
 
 		private int AnswerCount => Answers.Count(a => a.Result != QuestionAnswerResult.NoResult);
 
-		public void Evaluate(int incorrectEliminationRate)
+		internal void Evaluate(int incorrectEliminationRate)
 		{
 			CalculateResult(incorrectEliminationRate);
 		}

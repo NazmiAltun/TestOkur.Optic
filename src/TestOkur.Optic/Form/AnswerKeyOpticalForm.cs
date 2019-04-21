@@ -7,7 +7,7 @@
 	using TestOkur.Optic.Score;
 
 	[DataContract]
-	public class AnswerKeyOpticalForm : OpticalForm
+	public class AnswerKeyOpticalForm : OpticalForm<AnswerKeyOpticalFormSection>
 	{
 		public AnswerKeyOpticalForm(char booklet, List<ScoreFormula> scoreFormulas)
 			: this()
@@ -34,7 +34,7 @@
 		public int IncorrectEliminationRate { get; set; }
 
 		[DataMember]
-		public List<AnswerKeyOpticalFormSection> Sections { get; set; }
+		public override List<AnswerKeyOpticalFormSection> Sections { get; set; }
 
 		public IReadOnlyList<AnswerKeyQuestionAnswer> Answers => Sections.SelectMany(s => s.Answers).ToList();
 
