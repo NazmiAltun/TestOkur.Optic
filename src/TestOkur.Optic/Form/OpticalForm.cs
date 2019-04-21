@@ -5,15 +5,14 @@
 	using System.Runtime.Serialization;
 
 	[DataContract]
-	public abstract class OpticalForm<TSection>
-		where TSection : FormLessonSection
+	public abstract class OpticalForm
 	{
 		protected OpticalForm()
 		{
 			CreateDateTimeUtc = DateTime.UtcNow;
 		}
 
-		protected OpticalForm(OpticalForm<TSection> form, char booklet)
+		protected OpticalForm(OpticalForm form, char booklet)
 		{
 			ExamId = form.ExamId;
 			ExamDate = form.ExamDate;
@@ -22,7 +21,7 @@
 		}
 
 		[DataMember]
-		public abstract List<TSection> Sections { get; set; }
+		public List<FormLessonSection> Sections { get; set; }
 
 		[DataMember]
 		public string Id { get; set; }
