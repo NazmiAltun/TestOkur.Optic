@@ -27,7 +27,7 @@
 		public int StudentId { get; set; }
 
 		[DataMember]
-		public new List<StudentOpticalFormSection> Sections { get; set; }
+		public List<StudentOpticalFormSection> Sections { get; set; }
 
 		[DataMember]
 		public Dictionary<string, float> Scores { get; }

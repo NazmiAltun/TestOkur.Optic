@@ -1,7 +1,6 @@
 ﻿namespace TestOkur.Optic.Form
 {
 	using System;
-	using System.Collections.Generic;
 	using System.Runtime.Serialization;
 
 	[DataContract]
@@ -19,9 +18,6 @@
 			ExamName = form.ExamName;
 			Booklet = booklet;
 		}
-
-		[DataMember]
-		public List<FormLessonSection> Sections { get; set; }
 
 		[DataMember]
 		public string Id { get; set; }
