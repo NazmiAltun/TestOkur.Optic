@@ -5,6 +5,7 @@
 	using System.Runtime.Serialization;
 
 	[DebuggerDisplay("{ScoreName}")]
+	[DataContract]
 	public class ScoreFormula
 	{
 		public ScoreFormula(float basePoint, string scoreName)
@@ -14,11 +15,15 @@
 			Coefficients = new List<LessonCoefficient>();
 		}
 
-		[DataMember]
-		public float BasePoint { get; }
+		public ScoreFormula()
+		{
+		}
 
 		[DataMember]
-		public string ScoreName { get; }
+		public float BasePoint { get; private set; }
+
+		[DataMember]
+		public string ScoreName { get; private set; }
 
 		[DataMember]
 		public List<LessonCoefficient> Coefficients { get; set; }

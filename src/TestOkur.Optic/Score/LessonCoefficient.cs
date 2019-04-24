@@ -2,6 +2,7 @@
 {
 	using System.Runtime.Serialization;
 
+	[DataContract]
 	public class LessonCoefficient
 	{
 		public LessonCoefficient(string lesson, float coefficient)
@@ -10,10 +11,14 @@
 			Coefficient = coefficient;
 		}
 
-		[DataMember]
-		public string Lesson { get; }
+		public LessonCoefficient()
+		{
+		}
 
 		[DataMember]
-		public float Coefficient { get; }
+		public string Lesson { get; private set; }
+
+		[DataMember]
+		public float Coefficient { get; private set; }
 	}
 }
