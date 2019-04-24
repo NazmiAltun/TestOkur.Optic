@@ -11,10 +11,6 @@
 			Coefficient = coefficient;
 		}
 
-		public LessonCoefficient()
-		{
-		}
-
 		[DataMember]
 		public string Lesson { get; private set; }
 
