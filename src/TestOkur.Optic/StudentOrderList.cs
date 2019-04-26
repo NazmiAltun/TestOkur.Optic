@@ -41,37 +41,15 @@
 		private void Create()
 		{
 			CreateGeneralList();
-			CreateDistrictList();
-			CreateClassroomList();
-			CreateSchoolList();
+			_districtOrderList = CreateList(f => f.DistrictId);
+			_classroomOrderList = CreateList(f => f.ClassroomId);
+			_schoolOrderList = CreateList(f => f.UserId);
 		}
 
-		private void CreateSchoolList()
+		private Dictionary<int, List<float>> CreateList(Func<StudentOpticalForm, int> groupByFunc)
 		{
-			_schoolOrderList = _forms
-				.GroupBy(f => f.UserId)
-				.ToDictionary(g => g.Key, g =>
-					g.Select(_selector)
-						.OrderByDescending(x => x)
-						.Distinct()
-						.ToList());
-		}
-
-		private void CreateClassroomList()
-		{
-			_classroomOrderList = _forms
-				.GroupBy(f => f.ClassroomId)
-				.ToDictionary(g => g.Key, g =>
-					g.Select(_selector)
-						.OrderByDescending(x => x)
-						.Distinct()
-						.ToList());
-		}
-
-		private void CreateDistrictList()
-		{
-			_districtOrderList = _forms
-				.GroupBy(f => f.DistrictId)
+			return _forms
+				.GroupBy(groupByFunc)
 				.ToDictionary(g => g.Key, g =>
 					g.Select(_selector)
 						.OrderByDescending(x => x)

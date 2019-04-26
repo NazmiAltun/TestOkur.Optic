@@ -26,6 +26,7 @@
 		{
 			IncorrectEliminationRate = form.IncorrectEliminationRate;
 			Sections = new List<AnswerKeyOpticalFormSection>();
+			ScoreFormulas = form.ScoreFormulas;
 		}
 
 		public bool Empty => Sections.SelectMany(s => s.Answers).All(a => a.QuestionNo == default);

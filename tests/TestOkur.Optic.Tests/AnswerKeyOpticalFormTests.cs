@@ -6,6 +6,7 @@
 	using FluentAssertions;
 	using TestOkur.Optic.Answer;
 	using TestOkur.Optic.Form;
+	using TestOkur.Optic.Score;
 	using Xunit;
 
 	public class AnswerKeyOpticalFormTests
@@ -44,6 +45,16 @@
 				ExamId = 10,
 				ExamName = "Test",
 				IncorrectEliminationRate = 4,
+				ScoreFormulas = new List<ScoreFormula>()
+				{
+					new ScoreFormula(100, "TYT")
+					{
+						Coefficients = new List<LessonCoefficient>()
+						{
+							new LessonCoefficient("Math", 2)
+						}
+					}
+				}
 			};
 			form.AddSection(
 				new AnswerKeyOpticalFormSection(1, "Test")
@@ -64,15 +75,19 @@
 			var forms = form.Expand();
 			forms.Should().Contain(f => f.Booklet == 'A' &&
 										f.Sections.Count == 1 &&
+										f.ScoreFormulas.First().Coefficients.First().Lesson == "Math" &&
 										string.Join(",", f.Answers.Select(a => a.Answer).ToArray()) == "A,B,C,D,A,C,B,A");
 			forms.Should().Contain(f => f.Booklet == 'B' &&
-			                            f.Sections.Count == 1 &&
+										f.Sections.Count == 1 &&
+										f.ScoreFormulas.First().Coefficients.First().Lesson == "Math" &&
 										string.Join(",", f.Answers.Select(a => a.Answer).ToArray()) == "D,A,B,C,A,A,C,B");
 			forms.Should().Contain(f => f.Booklet == 'C' &&
-			                            f.Sections.Count == 1 &&
+										f.Sections.Count == 1 &&
+										f.ScoreFormulas.First().Coefficients.First().Lesson == "Math" &&
 										string.Join(",", f.Answers.Select(a => a.Answer).ToArray()) == "C,D,A,B,B,A,A,C");
 			forms.Should().Contain(f => f.Booklet == 'D' &&
-			                            f.Sections.Count == 1 &&
+										f.Sections.Count == 1 &&
+										f.ScoreFormulas.First().Coefficients.First().Lesson == "Math" &&
 										string.Join(",", f.Answers.Select(a => a.Answer).ToArray()) == "B,C,D,A,C,B,A,A");
 		}
 	}

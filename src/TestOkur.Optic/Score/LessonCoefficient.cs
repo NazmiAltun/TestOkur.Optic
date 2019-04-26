@@ -11,14 +11,10 @@
 			Coefficient = coefficient;
 		}
 
-		public LessonCoefficient()
-		{
-		}
+		[DataMember]
+		public string Lesson { get; private set; }
 
 		[DataMember]
-		public string Lesson { get; set; }
-
-		[DataMember]
-		public float Coefficient { get; set; }
+		public float Coefficient { get; private set; }
 	}
 }

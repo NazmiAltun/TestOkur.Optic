@@ -15,15 +15,11 @@
 			Coefficients = new List<LessonCoefficient>();
 		}
 
-		public ScoreFormula()
-		{
-		}
+		[DataMember]
+		public float BasePoint { get; private set; }
 
 		[DataMember]
-		public float BasePoint { get; set; }
-
-		[DataMember]
-		public string ScoreName { get; set; }
+		public string ScoreName { get; private set; }
 
 		[DataMember]
 		public List<LessonCoefficient> Coefficients { get; set; }
