@@ -1,6 +1,7 @@
 ﻿namespace TestOkur.Optic.Tests
 {
 	using System.Collections.Generic;
+	using System.Linq;
 	using FluentAssertions;
 	using TestOkur.Optic.Answer;
 	using TestOkur.Optic.Form;
@@ -50,14 +51,7 @@
 
 		private List<AnswerKeyQuestionAnswer> ParseAnswers(string answers)
 		{
-			var list = new List<AnswerKeyQuestionAnswer>();
-
-			for (var i = 0; i < answers.Length; i++)
-			{
-				list.Add(new AnswerKeyQuestionAnswer(i + 1, answers[i]));
-			}
-
-			return list;
+			return answers.Select((t, i) => new AnswerKeyQuestionAnswer(i + 1, t)).ToList();
 		}
 	}
 }

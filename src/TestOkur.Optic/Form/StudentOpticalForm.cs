@@ -21,6 +21,7 @@
 		{
 			Sections = new List<StudentOpticalFormSection>();
 			Scores = new Dictionary<string, float>();
+			Orders = new List<StudentOrder>();
 		}
 
 		[DataMember]
@@ -64,6 +65,9 @@
 
 		[DataMember]
 		public int DistrictId { get; set; }
+
+		[DataMember]
+		public List<StudentOrder> Orders { get; private set; }
 
 		public int EmptyCount => Sections.Select(s => s.EmptyCount).Sum();
 
@@ -118,6 +122,11 @@
 		{
 			EvaluateSections(incorrectEliminationRate);
 			CalculateScore(scoreFormulas);
+		}
+
+		internal void AddOrder(StudentOrder order)
+		{
+			Orders.Add(order);
 		}
 
 		private void EvaluateSections(int incorrectEliminationRate)
