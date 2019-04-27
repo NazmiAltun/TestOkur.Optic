@@ -8,14 +8,18 @@
 
 	public class AverageList
 	{
+		private readonly Func<StudentOpticalFormSection, float> _averageSelector;
 		private readonly Dictionary<string, float> _general;
 		private readonly Dictionary<int, Dictionary<string, float>> _district;
 		private readonly Dictionary<int, Dictionary<string, float>> _city;
 		private readonly Dictionary<int, Dictionary<string, float>> _school;
 		private readonly Dictionary<int, Dictionary<string, float>> _classroom;
 
-		public AverageList(IEnumerable<StudentOpticalForm> forms)
+		public AverageList(
+			IReadOnlyCollection<StudentOpticalForm> forms,
+			Func<StudentOpticalFormSection, float> averageSelector)
 		{
+			_averageSelector = averageSelector;
 			_general = Calculate(forms, f => default).First().Value;
 			_district = Calculate(forms, f => f.DistrictId);
 			_school = Calculate(forms, f => f.UserId);
@@ -48,7 +52,7 @@
 			return _school[userId].TryGetValue(lessonName, out var value) ? value : 0;
 		}
 
-		private static Dictionary<int, Dictionary<string, float>> Calculate(
+		private Dictionary<int, Dictionary<string, float>> Calculate(
 			IEnumerable<StudentOpticalForm> forms,
 			Func<StudentOpticalForm, int> selector)
 		{
@@ -56,7 +60,7 @@
 				.ToDictionary(g => g.Key, g =>
 					g.SelectMany(f => f.Sections)
 						.GroupBy(x => x.LessonName)
-						.ToDictionary(y => y.Key, y => (float)Round(y.Average(z => z.Net) * 100) / 100));
+						.ToDictionary(y => y.Key, y => (float)Round(y.Average(_averageSelector) * 100) / 100));
 		}
 	}
 }

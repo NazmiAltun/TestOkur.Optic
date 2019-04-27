@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using FluentAssertions;
-
-namespace TestOkur.Optic.Tests
+﻿namespace TestOkur.Optic.Tests
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
+	using FluentAssertions;
 	using TestOkur.Optic.Form;
+	using TestOkur.Optic.Tests.Extensions;
 	using Xunit;
 
 	public class AverageListTests
@@ -30,7 +30,7 @@ namespace TestOkur.Optic.Tests
 				a, b, c, d, e, f, g, h, i
 			};
 
-			var list = new AverageList(forms);
+			var list = new AverageList(forms, s => s.Net);
 			var average = list.GetGeneralAverage(a.Sections.First().LessonName);
 			average.Should().Be(78.89f);
 			average = list.GetDistrictAverage(a.Sections.First().LessonName, 1);
@@ -57,7 +57,11 @@ namespace TestOkur.Optic.Tests
 					new StudentOpticalFormSection(1, "Math")
 					{
 						Net = net
-					}
+					},
+					new StudentOpticalFormSection(2, _random.RandomString(10))
+					{
+						Net = net
+					},
 				}
 			};
 		}
