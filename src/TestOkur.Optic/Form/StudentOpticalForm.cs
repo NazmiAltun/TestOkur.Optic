@@ -124,11 +124,6 @@
 			CalculateScore(scoreFormulas);
 		}
 
-		internal void AddOrder(StudentOrder order)
-		{
-			Orders.Add(order);
-		}
-
 		private void EvaluateSections(int incorrectEliminationRate)
 		{
 			foreach (var section in Sections)

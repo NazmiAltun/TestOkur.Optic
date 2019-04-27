@@ -8,7 +8,7 @@
 
 	public class StudentOrderListTests
 	{
-		private readonly Random random = new Random();
+		private readonly Random _random = new Random();
 
 		[Fact]
 		public void ShouldCalculateExpectedly()
@@ -30,61 +30,61 @@
 
 			var list = new StudentOrderList("Net", forms, x => x.Net);
 
-			list.GetStudentOrder(a.StudentId).Should()
+			list.GetStudentOrder(a).Should()
 				.Match<StudentOrder>(
 					x => x.GeneralOrder == 2 &&
 					     x.ClassroomOrder == 2 &&
 					     x.SchoolOrder == 2 &&
 					     x.DistrictOrder == 2);
-			list.GetStudentOrder(b.StudentId).Should()
+			list.GetStudentOrder(b).Should()
 				.Match<StudentOrder>(
 					x => x.GeneralOrder == 2 &&
 					     x.ClassroomOrder == 2 &&
 					     x.SchoolOrder == 2 &&
 					     x.DistrictOrder == 2);
-			list.GetStudentOrder(c.StudentId).Should()
+			list.GetStudentOrder(c).Should()
 				.Match<StudentOrder>(
 					x => x.GeneralOrder == 1 &&
 					     x.ClassroomOrder == 1 &&
 					     x.SchoolOrder == 1 &&
 					     x.DistrictOrder == 1);
-			list.GetStudentOrder(d.StudentId).Should()
+			list.GetStudentOrder(d).Should()
 				.Match<StudentOrder>(
 					x => x.GeneralOrder == 1 &&
 					     x.ClassroomOrder == 1 &&
 					     x.SchoolOrder == 1 &&
 					     x.DistrictOrder == 1);
-			list.GetStudentOrder(e.StudentId).Should()
+			list.GetStudentOrder(e).Should()
 				.Match<StudentOrder>(
 					x => x.GeneralOrder == 3 &&
 					     x.ClassroomOrder == 1 &&
 					     x.SchoolOrder == 1 &&
 					     x.DistrictOrder == 3);
-			list.GetStudentOrder(e.StudentId).Should()
+			list.GetStudentOrder(e).Should()
 				.Match<StudentOrder>(
 					x => x.GeneralOrder == 3 &&
 					     x.ClassroomOrder == 1 &&
 					     x.SchoolOrder == 1 &&
 					     x.DistrictOrder == 3);
-			list.GetStudentOrder(f.StudentId).Should()
+			list.GetStudentOrder(f).Should()
 				.Match<StudentOrder>(
 					x => x.GeneralOrder == 3 &&
 					     x.ClassroomOrder == 1 &&
 					     x.SchoolOrder == 1 &&
 					     x.DistrictOrder == 1);
-			list.GetStudentOrder(g.StudentId).Should()
+			list.GetStudentOrder(g).Should()
 				.Match<StudentOrder>(
 					x => x.GeneralOrder == 4 &&
 					     x.ClassroomOrder == 2 &&
 					     x.SchoolOrder == 2 &&
 					     x.DistrictOrder == 2);
-			list.GetStudentOrder(h.StudentId).Should()
+			list.GetStudentOrder(h).Should()
 				.Match<StudentOrder>(
 					x => x.GeneralOrder == 2 &&
 					     x.ClassroomOrder == 2 &&
 					     x.SchoolOrder == 2 &&
 					     x.DistrictOrder == 2);
-			list.GetStudentOrder(i.StudentId).Should()
+			list.GetStudentOrder(i).Should()
 				.Match<StudentOrder>(
 					x => x.GeneralOrder == 1 &&
 					     x.ClassroomOrder == 1 &&
@@ -96,7 +96,7 @@
 		{
 			return new StudentOpticalForm
 			{
-				StudentId = random.Next(),
+				StudentId = _random.Next(),
 				ClassroomId = classroomId,
 				UserId = userId,
 				DistrictId = districtId,
