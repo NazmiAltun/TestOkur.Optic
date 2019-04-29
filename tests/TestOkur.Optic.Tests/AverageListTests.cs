@@ -30,7 +30,7 @@
 				a, b, c, d, e, f, g, h, i
 			};
 
-			var list = new AverageList(forms, s => s.Net);
+			var list = new AverageList("NET", forms, s => s.Net);
 			var average = list.GetGeneralAverage(a.Sections.First().LessonName);
 			average.Should().Be(78.89f);
 			average = list.GetDistrictAverage(a.Sections.First().LessonName, 1);

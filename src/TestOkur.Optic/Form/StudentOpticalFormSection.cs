@@ -18,6 +18,7 @@
 		public StudentOpticalFormSection()
 		{
 			Answers = new List<QuestionAnswer>();
+			Averages = new List<LessonAverage>();
 		}
 
 		[DataMember]
@@ -35,6 +36,9 @@
 		[DataMember]
 		public float Net { get; set; }
 
+		[DataMember]
+		public List<LessonAverage> Averages { get; private set; }
+
 		public float SuccessPercent => AnswerCount == 0 ? 0 : Net / AnswerCount * 100;
 
 		private int AnswerCount => Answers.Count(a => a.Result != QuestionAnswerResult.NoResult);
@@ -42,6 +46,11 @@
 		internal void Evaluate(int incorrectEliminationRate)
 		{
 			CalculateResult(incorrectEliminationRate);
+		}
+
+		internal void AddLessonAverage(LessonAverage lessonAverage)
+		{
+			Averages.Add(lessonAverage);
 		}
 
 		private void CalculateResult(int incorrectEliminationRate)
