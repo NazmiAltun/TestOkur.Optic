@@ -11,10 +11,12 @@
 	[DataContract]
 	public class StudentOpticalForm : OpticalForm
 	{
+		private const char DefaultBooklet = 'A';
+
 		public StudentOpticalForm(char booklet)
 			: this()
 		{
-			Booklet = booklet;
+			Booklet = char.IsWhiteSpace(booklet) ? DefaultBooklet : booklet;
 		}
 
 		public StudentOpticalForm()
