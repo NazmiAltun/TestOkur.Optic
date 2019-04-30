@@ -19,6 +19,7 @@
 		public AnswerKeyOpticalForm()
 		{
 			Sections = new List<AnswerKeyOpticalFormSection>();
+			ScoreFormulas = new List<ScoreFormula>();
 		}
 
 		private AnswerKeyOpticalForm(AnswerKeyOpticalForm form, char booklet)
