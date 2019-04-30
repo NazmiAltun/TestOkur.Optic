@@ -80,6 +80,14 @@
 					x.SchoolOrder == 1 &&
 					x.DistrictOrder == 1 &&
 					x.CityOrder == 1);
+			studentForms.First().Orders
+				.First(o => o.Name == answerKeyForms.First().ScoreFormulas.First().ScoreName)
+				.Should().Match<StudentOrder>(x =>
+					x.GeneralOrder == 1 &&
+					x.ClassroomOrder == 1 &&
+					x.SchoolOrder == 1 &&
+					x.DistrictOrder == 1 &&
+					x.CityOrder == 1);
 			studentForms.Last().Orders
 				.First(o => o.Name == "NET")
 				.Should().Match<StudentOrder>(x =>

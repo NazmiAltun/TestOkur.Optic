@@ -20,6 +20,34 @@
 
 		public List<StudentOpticalForm> Evaluate(List<StudentOpticalForm> forms)
 		{
+			EvaluateForms(forms);
+			SetOrdersAndAverages(forms);
+
+			return forms;
+		}
+
+		private void SetOrdersAndAverages(IReadOnlyCollection<StudentOpticalForm> forms)
+		{
+			var orderLists = CreateOrderLists(forms);
+			var netAverageList = new AverageList("NET", forms, s => s.Net);
+
+			foreach (var form in forms)
+			{
+				foreach (var orderList in orderLists)
+				{
+					form.AddStudentOrder(orderList.GetStudentOrder(form));
+				}
+
+				foreach (var section in form.Sections)
+				{
+					netAverageList.GetClassroomAverage(section.LessonName, form.ClassroomId);
+					section.AddLessonAverage(netAverageList.Get(form, section.LessonName));
+				}
+			}
+		}
+
+		private void EvaluateForms(IEnumerable<StudentOpticalForm> forms)
+		{
 			var answerFormKeyDict = _answerKeyOpticalForms
 				.ToDictionary(x => x.Booklet, x => x);
 
@@ -28,22 +56,16 @@
 				var answerKeyForm = answerFormKeyDict[form.Booklet];
 				form.Evaluate(answerKeyForm.IncorrectEliminationRate, answerKeyForm.ScoreFormulas);
 			}
+		}
 
-			var netOrderList = new StudentOrderList("NET", forms, f => f.Net);
-			var netAverageList = new AverageList("NET", forms, s => s.Net);
-
-			foreach (var form in forms)
-			{
-				form.AddStudentOrder(netOrderList.GetStudentOrder(form));
-
-				foreach (var section in form.Sections)
-				{
-					netAverageList.GetClassroomAverage(section.LessonName, form.ClassroomId);
-					section.AddLessonAverage(netAverageList.Get(form, section.LessonName));
-				}
-			}
-
-			return forms;
+		private List<StudentOrderList> CreateOrderLists(
+			IReadOnlyCollection<StudentOpticalForm> forms)
+		{
+			return _answerKeyOpticalForms.First()
+				.ScoreFormulas
+				.Select(f => new StudentOrderList(f.ScoreName, forms, s => s.Scores[f.ScoreName]))
+				.Concat(new[] { new StudentOrderList("NET", forms, f => f.Net) })
+				.ToList();
 		}
 	}
 }
