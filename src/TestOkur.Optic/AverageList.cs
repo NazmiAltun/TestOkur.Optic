@@ -25,7 +25,7 @@
 			_name = name;
 			_general = Calculate(forms, f => default).First().Value;
 			_district = Calculate(forms, f => f.DistrictId);
-			_school = Calculate(forms, f => f.UserId);
+			_school = Calculate(forms, f => f.SchoolId);
 			_classroom = Calculate(forms, f => f.ClassroomId);
 			_city = Calculate(forms, f => f.CityId);
 		}
@@ -37,7 +37,7 @@
 				GetGeneralAverage(lessonName),
 				GetCityAverage(lessonName, form.CityId),
 				GetDistrictAverage(lessonName, form.DistrictId),
-				GetSchoolAverage(lessonName, form.UserId),
+				GetSchoolAverage(lessonName, form.SchoolId),
 				GetClassroomAverage(lessonName, form.ClassroomId));
 		}
 

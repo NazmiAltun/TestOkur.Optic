@@ -34,7 +34,8 @@
 				ExamDate = DateTime.Today,
 				ClassroomId = 1,
 				Classroom = "12/E",
-				UserId = 1,
+				SchoolId = 1,
+				UserId = "1",
 				CityId = 35,
 				CityName = "Izmir",
 				DistrictId = 20,
@@ -53,7 +54,8 @@
 				ExamDate = DateTime.Today,
 				ClassroomId = 2,
 				Classroom = "12/C",
-				UserId = 1,
+				UserId = "1",
+				SchoolId = 1,
 				CityId = 35,
 				CityName = "Izmir",
 				DistrictId = 20,
@@ -70,8 +72,8 @@
 					 x.SuccessPercent == 77.34f);
 			studentForms.Last().Should().Match<StudentOpticalForm>(
 				x => x.Net == 60.5f &&
-				     x.Score == 301.66f &&
-				     x.SuccessPercent == 45.62f);
+					 x.Score == 301.66f &&
+					 x.SuccessPercent == 45.62f);
 			studentForms.First().Orders
 				.First(o => o.Name == "NET")
 				.Should().Match<StudentOrder>(x =>

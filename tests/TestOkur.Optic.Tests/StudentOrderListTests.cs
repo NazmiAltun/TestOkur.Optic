@@ -98,7 +98,8 @@
 			{
 				StudentId = _random.Next(),
 				ClassroomId = classroomId,
-				UserId = userId,
+				UserId = userId.ToString(),
+				SchoolId = userId,
 				DistrictId = districtId,
 				Sections = new List<StudentOpticalFormSection>()
 				{

@@ -24,7 +24,7 @@
 			_orderName = orderName;
 			_districtOrderList = CreateList(forms, f => f.DistrictId);
 			_classroomOrderList = CreateList(forms, f => f.ClassroomId);
-			_schoolOrderList = CreateList(forms, f => f.UserId);
+			_schoolOrderList = CreateList(forms, f => f.SchoolId);
 			_cityOrderList = CreateList(forms, f => f.CityId);
 			_generalOrderList = CreateList(forms, f => default).First().Value;
 		}
@@ -34,7 +34,7 @@
 			return new StudentOrder(
 				_orderName,
 				_classroomOrderList[form.ClassroomId].IndexOf(_selector(form)) + 1,
-				_schoolOrderList[form.UserId].IndexOf(_selector(form)) + 1,
+				_schoolOrderList[form.SchoolId].IndexOf(_selector(form)) + 1,
 				_districtOrderList[form.DistrictId].IndexOf(_selector(form)) + 1,
 				_cityOrderList[form.CityId].IndexOf(_selector(form)) + 1,
 				_generalOrderList.IndexOf(_selector(form)) + 1);

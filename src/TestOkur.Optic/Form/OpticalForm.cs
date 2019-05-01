@@ -14,6 +14,8 @@
 		protected OpticalForm(OpticalForm form, char booklet)
 		{
 			ExamId = form.ExamId;
+			UserId = form.UserId;
+			SchoolId = form.SchoolId;
 			ExamDate = form.ExamDate;
 			ExamName = form.ExamName;
 			Booklet = booklet;
@@ -23,7 +25,10 @@
 		public string Id { get; set; }
 
 		[DataMember]
-		public int UserId { get; set; }
+		public string UserId { get; set; }
+
+		[DataMember]
+		public int SchoolId { get; set; }
 
 		[DataMember]
 		public int ExamId { get; set; }
