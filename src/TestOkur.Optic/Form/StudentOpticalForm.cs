@@ -33,7 +33,7 @@
 		public List<StudentOpticalFormSection> Sections { get; set; }
 
 		[DataMember]
-		public Dictionary<string, float> Scores { get; }
+		public Dictionary<string, float> Scores { get; private set; }
 
 		[DataMember]
 		public Guid ScanSessionReportId { get; set; }
