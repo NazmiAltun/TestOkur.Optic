@@ -48,6 +48,8 @@
 			CalculateResult(incorrectEliminationRate);
 		}
 
+		internal void ClearLessonAverages() => Averages.Clear();
+
 		internal void AddLessonAverage(LessonAverage lessonAverage)
 		{
 			Averages.Add(lessonAverage);

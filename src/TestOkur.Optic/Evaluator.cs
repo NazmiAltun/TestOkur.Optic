@@ -33,6 +33,7 @@
 
 			foreach (var form in forms)
 			{
+				form.ClearOrders();
 				foreach (var orderList in orderLists)
 				{
 					form.AddStudentOrder(orderList.GetStudentOrder(form));
@@ -41,6 +42,7 @@
 				foreach (var section in form.Sections)
 				{
 					netAverageList.GetClassroomAverage(section.LessonName, form.ClassroomId);
+					section.ClearLessonAverages();
 					section.AddLessonAverage(netAverageList.Get(form, section.LessonName));
 				}
 			}

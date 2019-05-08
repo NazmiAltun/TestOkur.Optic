@@ -126,7 +126,9 @@
 			CalculateScore(scoreFormulas);
 		}
 
-		public void AddStudentOrder(StudentOrder item)
+		internal void ClearOrders() => Orders.Clear();
+
+		internal void AddStudentOrder(StudentOrder item)
 		{
 			Orders.Add(item);
 		}
