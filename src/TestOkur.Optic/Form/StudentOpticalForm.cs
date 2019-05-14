@@ -69,6 +69,18 @@
 		public int DistrictId { get; set; }
 
 		[DataMember]
+		public int GeneralAttendanceCount { get; internal set; }
+
+		[DataMember]
+		public int CityAttendanceCount { get; internal set; }
+
+		[DataMember]
+		public int SchoolAttendanceCount { get; internal set; }
+
+		[DataMember]
+		public int ClassroomAttendanceCount { get; internal set; }
+
+		[DataMember]
 		public List<StudentOrder> Orders { get; private set; }
 
 		public int EmptyCount => Sections.Select(s => s.EmptyCount).Sum();
@@ -84,6 +96,31 @@
 		public float SuccessPercent => (float)Round(
 			                               Sections.Select(s => s.SuccessPercent).Average() *
 			                               100) / 100;
+
+		public float ClassroomAverageNet => Sections
+			.SelectMany(s => s.Averages)
+			.Where(a => a.Name == "NET")
+			.Select(a => a.Classroom).Sum();
+
+		public float SchoolAverageNet => Sections
+			.SelectMany(s => s.Averages)
+			.Where(a => a.Name == "NET")
+			.Select(a => a.School).Sum();
+
+		public float DistrictAverageNet => Sections
+			.SelectMany(s => s.Averages)
+			.Where(a => a.Name == "NET")
+			.Select(a => a.District).Sum();
+
+		public float CityAverageNet => Sections
+			.SelectMany(s => s.Averages)
+			.Where(a => a.Name == "NET")
+			.Select(a => a.City).Sum();
+
+		public float GeneralAverageNet => Sections
+			.SelectMany(s => s.Averages)
+			.Where(a => a.Name == "NET")
+			.Select(a => a.General).Sum();
 
 		public float Score => Scores.Any() ? Scores.First().Value : SuccessPercent;
 

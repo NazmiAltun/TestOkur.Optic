@@ -22,8 +22,20 @@
 		{
 			EvaluateForms(forms);
 			SetOrdersAndAverages(forms);
+			SetAttendance(forms);
 
 			return forms;
+		}
+
+		private void SetAttendance(IReadOnlyCollection<StudentOpticalForm> forms)
+		{
+			foreach (var form in forms)
+			{
+				form.GeneralAttendanceCount = forms.Count;
+				form.CityAttendanceCount = forms.Count(f => f.CityId == form.CityId);
+				form.ClassroomAttendanceCount = forms.Count(f => f.ClassroomId == form.ClassroomId);
+				form.SchoolAttendanceCount = forms.Count(f => f.SchoolId == form.SchoolId);
+			}
 		}
 
 		private void SetOrdersAndAverages(IReadOnlyCollection<StudentOpticalForm> forms)
