@@ -7,17 +7,6 @@
 		private const string ValidAnswers = "ABCDE";
 		private const char Empty = ' ';
 
-		public QuestionAnswer(
-			int questionNo,
-			char answer,
-			int subjectId,
-			string subjectName)
-			: this(questionNo, answer)
-		{
-			SubjectId = subjectId;
-			SubjectName = subjectName;
-		}
-
 		public QuestionAnswer(int questionNo, char answer)
 		{
 			QuestionNo = questionNo;
