@@ -47,23 +47,20 @@
 				return;
 			}
 
-			SubjectId = answerKeyQuestionAnswer.SubjectId;
-			SubjectName = answerKeyQuestionAnswer.SubjectName;
+			AssignProperties(answerKeyQuestionAnswer);
 
-			if (answerKeyQuestionAnswer.QuestionAnswerCancelAction == QuestionAnswerCancelAction.CorrectForAll)
+			if (ProcessCancelAction(answerKeyQuestionAnswer))
 			{
-				Result = QuestionAnswerResult.Correct;
 				return;
 			}
 
-			if (answerKeyQuestionAnswer.QuestionAnswerCancelAction == QuestionAnswerCancelAction.EmptyForAll)
-			{
-				Result = QuestionAnswerResult.Empty;
-				return;
-			}
+			SetResult();
+		}
 
-			CorrectAnswer = answerKeyQuestionAnswer.Answer;
+		public override string ToString() => Answer.ToString();
 
+		private void SetResult()
+		{
 			if (Answer == Empty)
 			{
 				Result = QuestionAnswerResult.Empty;
@@ -79,6 +76,26 @@
 			Result = CorrectAnswer == Answer ? QuestionAnswerResult.Correct : QuestionAnswerResult.Wrong;
 		}
 
-		public override string ToString() => Answer.ToString();
+		private bool ProcessCancelAction(AnswerKeyQuestionAnswer answerKeyQuestionAnswer)
+		{
+			switch (answerKeyQuestionAnswer.QuestionAnswerCancelAction)
+			{
+				case QuestionAnswerCancelAction.CorrectForAll:
+					Result = QuestionAnswerResult.Correct;
+					return true;
+				case QuestionAnswerCancelAction.EmptyForAll:
+					Result = QuestionAnswerResult.Empty;
+					return true;
+				default:
+					return false;
+			}
+		}
+
+		private void AssignProperties(AnswerKeyQuestionAnswer answerKeyQuestionAnswer)
+		{
+			SubjectId = answerKeyQuestionAnswer.SubjectId;
+			SubjectName = answerKeyQuestionAnswer.SubjectName;
+			CorrectAnswer = answerKeyQuestionAnswer.Answer;
+		}
 	}
 }
