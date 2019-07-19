@@ -3,7 +3,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/NazmiAltun/TestOkur.Optic?branch=master)](https://bettercodehub.com/)
 [![](https://sonarcloud.io/api/project_badges/measure?project=NazmiAltun_TestOkur.Optic&metric=alert_status)](https://sonarcloud.io/project/issues?id=NazmiAltun_TestOkur.Optic&resolved=false&types=alert_status) 
 [![](https://sonarcloud.io/api/project_badges/measure?project=NazmiAltun_TestOkur.Optic&metric=code_smells)](https://sonarcloud.io/project/issues?id=NazmiAltun_TestOkur.Optic&resolved=false&types=CODE_SMELL) 
-[![CodeFactor](https://www.codefactor.io/repository/github/nazmialtun/testokur.optic/badge)](https://www.codefactor.io/repository/github/nazmialtun/testokur.optic)
+[![CodeFactor](https://www.codefactor.io/repository/github/testokur/testokur.optic/badge)](https://www.codefactor.io/repository/github/testokur/testokur.optic)
 
 # TestOkur.Optic
 
