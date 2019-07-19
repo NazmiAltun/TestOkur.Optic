@@ -1,4 +1,6 @@
-﻿namespace TestOkur.Optic.Score
+﻿using System;
+
+namespace TestOkur.Optic.Score
 {
 	using System.Collections.Generic;
 	using System.Diagnostics;
@@ -11,7 +13,7 @@
 		public ScoreFormula(float basePoint, string scoreName)
 		{
 			BasePoint = basePoint;
-			ScoreName = scoreName;
+			ScoreName = scoreName.Replace(".", string.Empty);
 			Coefficients = new List<LessonCoefficient>();
 		}
 
