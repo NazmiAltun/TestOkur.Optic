@@ -69,7 +69,7 @@
 		public int DistrictId { get; set; }
 
 		[DataMember]
-		public int GeneralAttendanceCount { get; internal set; }
+		public int GeneralAttendanceCount { get; set; }
 
 		[DataMember]
 		public int CityAttendanceCount { get; internal set; }
