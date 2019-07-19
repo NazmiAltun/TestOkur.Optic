@@ -191,6 +191,7 @@
 							formula.Coefficients
 								.Select(c => c.Coefficient * Sections.FirstOrDefault(s => s.LessonName == c.Lesson)?.Net ?? 0)
 								.Sum();
+				Scores.Remove(formula.ScoreName);
 				Scores.Add(formula.ScoreName, (float)Round(score * 100) / 100);
 			}
 		}
