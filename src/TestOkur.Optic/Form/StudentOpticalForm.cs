@@ -137,19 +137,19 @@
 			.Select(a => a.General).Sum();
 
 		[DataMember]
-		public int ClassOrder => Orders.First(o => o.Name != "NET").ClassroomOrder;
+		public int ClassOrder => Orders?.FirstOrDefault(o => o.Name != "NET")?.ClassroomOrder ?? 0;
 
 		[DataMember]
-		public int SchoolOrder => Orders.First(o => o.Name != "NET").SchoolOrder;
+		public int SchoolOrder => Orders?.FirstOrDefault(o => o.Name != "NET")?.SchoolOrder ?? 0;
 
 		[DataMember]
-		public int DistrictOrder => Orders.First(o => o.Name != "NET").DistrictOrder;
+		public int DistrictOrder => Orders?.FirstOrDefault(o => o.Name != "NET")?.DistrictOrder ?? 0;
 
 		[DataMember]
-		public int CityOrder => Orders.First(o => o.Name != "NET").CityOrder;
+		public int CityOrder => Orders?.FirstOrDefault(o => o.Name != "NET")?.CityOrder ?? 0;
 
 		[DataMember]
-		public int GeneralOrder => Orders.First(o => o.Name != "NET").GeneralOrder;
+		public int GeneralOrder => Orders?.FirstOrDefault(o => o.Name != "NET")?.GeneralOrder ?? 0;
 
 		[DataMember]
 		public float Score => Scores.Any() ? Scores.First().Value : SuccessPercent;
