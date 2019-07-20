@@ -33,8 +33,18 @@
 			{
 				form.GeneralAttendanceCount = forms.Count;
 				form.CityAttendanceCount = forms.Count(f => f.CityId == form.CityId);
+				form.DistrictAttendanceCount = forms.Count(f => f.DistrictId == form.DistrictId);
 				form.ClassroomAttendanceCount = forms.Count(f => f.ClassroomId == form.ClassroomId);
 				form.SchoolAttendanceCount = forms.Count(f => f.SchoolId == form.SchoolId);
+				form.CityScoreAverage = forms.Where(f => f.CityId == form.CityId)
+					.Average(f => f.Score);
+				form.ClassScoreAverage = forms.Where(f => f.ClassroomId == form.ClassroomId)
+					.Average(f => f.Score);
+				form.DistrictScoreAverage = forms.Where(f => f.DistrictId == form.DistrictId)
+					.Average(f => f.Score);
+				form.GeneralScoreAverage = forms.Average(f => f.Score);
+				form.SchoolScoreAverage = forms.Where(f => f.SchoolId == form.SchoolId)
+					.Average(f => f.Score);
 			}
 		}
 

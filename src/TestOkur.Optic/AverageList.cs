@@ -30,9 +30,9 @@
 			_city = Calculate(forms, f => f.CityId);
 		}
 
-		public LessonAverage Get(StudentOpticalForm form, string lessonName)
+		public Average Get(StudentOpticalForm form, string lessonName)
 		{
-			return new LessonAverage(
+			return new Average(
 				_name,
 				GetGeneralAverage(lessonName),
 				GetCityAverage(lessonName, form.CityId),

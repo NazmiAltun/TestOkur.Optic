@@ -101,7 +101,7 @@
 			studentForms.First().Sections
 				.First(s => s.LessonName == "Tr")
 				.Averages.First(a => a.Name == "NET")
-				.Should().Match<LessonAverage>(
+				.Should().Match<Average>(
 					x => x.City == 35.25f &&
 						 x.School == 35.25f &&
 						 x.Classroom == 37.5f &&

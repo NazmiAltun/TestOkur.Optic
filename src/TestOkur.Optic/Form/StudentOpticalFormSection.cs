@@ -18,7 +18,7 @@
 		public StudentOpticalFormSection()
 		{
 			Answers = new List<QuestionAnswer>();
-			Averages = new List<LessonAverage>();
+			Averages = new List<Average>();
 		}
 
 		[DataMember]
@@ -34,12 +34,31 @@
 		public int CorrectCount { get; set; }
 
 		[DataMember]
+		public int QuestionCount => Answers.Count;
+
+		[DataMember]
 		public float Net { get; set; }
 
 		[DataMember]
-		public List<LessonAverage> Averages { get; private set; }
+		public List<Average> Averages { get; private set; }
 
+		[DataMember]
 		public float SuccessPercent => AnswerCount == 0 ? 0 : Net / AnswerCount * 100;
+
+		[DataMember]
+		public float ClassroomAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.Classroom ?? 0;
+
+		[DataMember]
+		public float SchoolAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.School ?? 0;
+
+		[DataMember]
+		public float DistrictAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.District ?? 0;
+
+		[DataMember]
+		public float CityAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.City ?? 0;
+
+		[DataMember]
+		public float GeneralAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.General ?? 0;
 
 		private int AnswerCount => Answers.Count(a => a.Result != QuestionAnswerResult.NoResult);
 
@@ -50,9 +69,9 @@
 
 		internal void ClearLessonAverages() => Averages.Clear();
 
-		internal void AddLessonAverage(LessonAverage lessonAverage)
+		internal void AddLessonAverage(Average average)
 		{
-			Averages.Add(lessonAverage);
+			Averages.Add(average);
 		}
 
 		private void CalculateResult(int incorrectEliminationRate)

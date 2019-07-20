@@ -3,9 +3,9 @@
 	using System.Runtime.Serialization;
 
 	[DataContract]
-	public class LessonAverage
+	public class Average
 	{
-		public LessonAverage(string name, float general, float city, float district, float school, float classroom)
+		public Average(string name, float general, float city, float district, float school, float classroom)
 		{
 			Name = name;
 			General = general;

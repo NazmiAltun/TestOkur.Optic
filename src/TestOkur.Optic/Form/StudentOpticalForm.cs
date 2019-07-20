@@ -75,6 +75,9 @@
 		public int CityAttendanceCount { get; internal set; }
 
 		[DataMember]
+		public int DistrictAttendanceCount { get; internal set; }
+
+		[DataMember]
 		public int SchoolAttendanceCount { get; internal set; }
 
 		[DataMember]
@@ -83,46 +86,88 @@
 		[DataMember]
 		public List<StudentOrder> Orders { get; private set; }
 
+		[DataMember]
 		public int EmptyCount => Sections.Select(s => s.EmptyCount).Sum();
 
+		[DataMember]
 		public int WrongCount => Sections.Select(s => s.WrongCount).Sum();
 
+		[DataMember]
 		public int CorrectCount => Sections.Select(s => s.CorrectCount).Sum();
 
+		[DataMember]
 		public int QuestionCount => Sections.SelectMany(s => s.Answers).Count();
 
+		[DataMember]
 		public float Net => Sections.Select(s => s.Net).Sum();
 
+		[DataMember]
 		public float SuccessPercent => (float)Round(
 			                               Sections.Select(s => s.SuccessPercent).Average() *
 			                               100) / 100;
 
+		[DataMember]
 		public float ClassroomAverageNet => Sections
 			.SelectMany(s => s.Averages)
 			.Where(a => a.Name == "NET")
 			.Select(a => a.Classroom).Sum();
 
+		[DataMember]
 		public float SchoolAverageNet => Sections
 			.SelectMany(s => s.Averages)
 			.Where(a => a.Name == "NET")
 			.Select(a => a.School).Sum();
 
+		[DataMember]
 		public float DistrictAverageNet => Sections
 			.SelectMany(s => s.Averages)
 			.Where(a => a.Name == "NET")
 			.Select(a => a.District).Sum();
 
+		[DataMember]
 		public float CityAverageNet => Sections
 			.SelectMany(s => s.Averages)
 			.Where(a => a.Name == "NET")
 			.Select(a => a.City).Sum();
 
+		[DataMember]
 		public float GeneralAverageNet => Sections
 			.SelectMany(s => s.Averages)
 			.Where(a => a.Name == "NET")
 			.Select(a => a.General).Sum();
 
+		[DataMember]
+		public int ClassOrder => Orders.First(o => o.Name != "NET").ClassroomOrder;
+
+		[DataMember]
+		public int SchoolOrder => Orders.First(o => o.Name != "NET").SchoolOrder;
+
+		[DataMember]
+		public int DistrictOrder => Orders.First(o => o.Name != "NET").DistrictOrder;
+
+		[DataMember]
+		public int CityOrder => Orders.First(o => o.Name != "NET").CityOrder;
+
+		[DataMember]
+		public int GeneralOrder => Orders.First(o => o.Name != "NET").GeneralOrder;
+
+		[DataMember]
 		public float Score => Scores.Any() ? Scores.First().Value : SuccessPercent;
+
+		[DataMember]
+		public float ClassScoreAverage { get; internal set; }
+
+		[DataMember]
+		public float SchoolScoreAverage { get; internal set; }
+
+		[DataMember]
+		public float DistrictScoreAverage { get; internal set; }
+
+		[DataMember]
+		public float CityScoreAverage { get; internal set; }
+
+		[DataMember]
+		public float GeneralScoreAverage { get; internal set; }
 
 		public void SetFromScanOutput(ScanOutput scanOutput, AnswerKeyOpticalForm answerKeyOpticalForm)
 		{
