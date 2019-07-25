@@ -1,4 +1,8 @@
-﻿namespace TestOkur.Optic
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("TestOkur.Optic.Tests")]
+
+namespace TestOkur.Optic
 {
 	using System.Collections.Generic;
 	using System.Linq;
@@ -20,11 +24,34 @@
 
 		public List<StudentOpticalForm> Evaluate(List<StudentOpticalForm> forms)
 		{
+			FillMissingSections(forms);
 			EvaluateForms(forms);
 			SetOrdersAndAverages(forms);
 			SetAttendance(forms);
 
 			return forms;
+		}
+
+		private void FillMissingSections(List<StudentOpticalForm> forms)
+		{
+			var answerFormKeyDict = _answerKeyOpticalForms
+				.ToDictionary(x => x.Booklet, x => x);
+
+			foreach (var form in forms)
+			{
+				FillMissingSections(form, answerFormKeyDict[form.Booklet]);
+			}
+		}
+
+		internal void FillMissingSections(StudentOpticalForm form, AnswerKeyOpticalForm answerKeyForm)
+		{
+			foreach (var section in answerKeyForm.Sections)
+			{
+				if (!form.ContainsSection(section.LessonId))
+				{
+					form.AddEmptySection(section);
+				}
+			}
 		}
 
 		private void SetAttendance(IReadOnlyCollection<StudentOpticalForm> forms)

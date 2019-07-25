@@ -1,4 +1,6 @@
-﻿namespace TestOkur.Optic.Form
+﻿using System.Net.Sockets;
+
+namespace TestOkur.Optic.Form
 {
 	using System;
 	using System.Collections.Generic;
@@ -208,11 +210,26 @@
 			CalculateScore(scoreFormulas);
 		}
 
+		internal bool ContainsSection(int lessonId) => Sections.Any(s => s.LessonId == lessonId);
+
 		internal void ClearOrders() => Orders.Clear();
 
 		internal void AddStudentOrder(StudentOrder item)
 		{
 			Orders.Add(item);
+		}
+
+		internal void AddEmptySection(AnswerKeyOpticalFormSection answerKeyOpticalFormSection)
+		{
+			var section = new StudentOpticalFormSection(
+				answerKeyOpticalFormSection.LessonId,
+				answerKeyOpticalFormSection.LessonName)
+			{
+				Answers = answerKeyOpticalFormSection.Answers
+					.Select(a => new QuestionAnswer(a.QuestionNo, QuestionAnswer.Empty))
+					.ToList(),
+			};
+			Sections.Add(section);
 		}
 
 		private void EvaluateSections(int incorrectEliminationRate)

@@ -14,6 +14,43 @@
 		private readonly Random _random = new Random();
 
 		[Fact]
+		public void FillMissingSections_Should_FillMissingSections()
+		{
+			var answerKeyForms = new List<AnswerKeyOpticalForm>
+			{
+				GenerateAnswerKeyFormA(),
+				GeneratedAnswerKeyFormB()
+			};
+			var evaluator = new Evaluator(answerKeyForms);
+			var studentForm = new StudentOpticalForm('A')
+			{
+				StudentId = 6456,
+				StudentNumber = 543,
+				StudentFirstName = "Nazmi",
+				StudentLastName = "Altun",
+				ExamName = "Test-54353",
+				ExamDate = DateTime.Today.AddDays(-2),
+				ClassroomId = 65,
+				Classroom = "11/B",
+				SchoolId = 4,
+				UserId = "4",
+				CityId = 35,
+				CityName = "Izmir",
+				DistrictId = 20,
+				DistrictName = "Bayrakli",
+			};
+			studentForm.SetFromScanOutput(new ScanOutput("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", 1), answerKeyForms.First());
+			evaluator.FillMissingSections(studentForm,answerKeyForms.First());
+			studentForm.Sections.Count.Should().Be(answerKeyForms.First().Sections.Count);
+
+			foreach (var section in answerKeyForms.First().Sections)
+			{
+				studentForm.Sections.First(s => s.LessonId == section.LessonId)
+					.Answers.Count().Should().Be(section.Answers.Count);
+			}
+		}
+
+		[Fact]
 		public void ShouldEvaluateExpectedly()
 		{
 			var answerKeyForms = new List<AnswerKeyOpticalForm>

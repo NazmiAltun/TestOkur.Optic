@@ -5,7 +5,7 @@
 	public class QuestionAnswer
 	{
 		private const string ValidAnswers = "ABCDE";
-		private const char Empty = ' ';
+		internal const char Empty = ' ';
 
 		public QuestionAnswer(int questionNo, char answer)
 		{
