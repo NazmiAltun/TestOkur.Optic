@@ -4,8 +4,8 @@
 
 	public class QuestionAnswer
 	{
-		private const string ValidAnswers = "ABCDE";
 		internal const char Empty = ' ';
+		private const string ValidAnswers = "ABCDE";
 
 		public QuestionAnswer(int questionNo, char answer)
 		{

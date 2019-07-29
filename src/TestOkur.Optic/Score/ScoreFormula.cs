@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TestOkur.Optic.Score
+﻿namespace TestOkur.Optic.Score
 {
 	using System.Collections.Generic;
 	using System.Diagnostics;

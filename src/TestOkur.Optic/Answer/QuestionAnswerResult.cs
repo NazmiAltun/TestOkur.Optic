@@ -6,6 +6,6 @@
 		Wrong = 1,
 		Correct = 2,
 		Empty = 3,
-		Invalid = 4
+		Invalid = 4,
 	}
 }

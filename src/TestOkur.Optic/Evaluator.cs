@@ -32,17 +32,6 @@ namespace TestOkur.Optic
 			return forms;
 		}
 
-		private void FillMissingSections(List<StudentOpticalForm> forms)
-		{
-			var answerFormKeyDict = _answerKeyOpticalForms
-				.ToDictionary(x => x.Booklet, x => x);
-
-			foreach (var form in forms)
-			{
-				FillMissingSections(form, answerFormKeyDict[form.Booklet]);
-			}
-		}
-
 		internal void FillMissingSections(StudentOpticalForm form, AnswerKeyOpticalForm answerKeyForm)
 		{
 			foreach (var section in answerKeyForm.Sections)
@@ -51,6 +40,17 @@ namespace TestOkur.Optic
 				{
 					form.AddEmptySection(section);
 				}
+			}
+		}
+
+		private void FillMissingSections(List<StudentOpticalForm> forms)
+		{
+			var answerFormKeyDict = _answerKeyOpticalForms
+				.ToDictionary(x => x.Booklet, x => x);
+
+			foreach (var form in forms)
+			{
+				FillMissingSections(form, answerFormKeyDict[form.Booklet]);
 			}
 		}
 

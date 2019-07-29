@@ -4,6 +4,6 @@
 	{
 		None = 0,
 		CorrectForAll,
-		EmptyForAll
+		EmptyForAll,
 	}
 }

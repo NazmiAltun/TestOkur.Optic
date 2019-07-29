@@ -1,6 +1,4 @@
-﻿using System.Net.Sockets;
-
-namespace TestOkur.Optic.Form
+﻿namespace TestOkur.Optic.Form
 {
 	using System;
 	using System.Collections.Generic;
@@ -104,9 +102,9 @@ namespace TestOkur.Optic.Form
 		public float Net => Sections.Select(s => s.Net).Sum();
 
 		[DataMember]
-		public float SuccessPercent => (float)Round(
-			                               Sections.Select(s => s.SuccessPercent).Average() *
-			                               100) / 100;
+		public float SuccessPercent => Sections == null ? 0 : (float)Round(
+										   Sections.Select(s => s.SuccessPercent).Average() *
+										   100) / 100;
 
 		[DataMember]
 		public float ClassroomAverageNet => Sections
