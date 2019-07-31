@@ -101,7 +101,7 @@
 		[DataMember]
 		public float Net => Sections.Select(s => s.Net).Sum();
 
-		[DataMember] public float SuccessPercent => QuestionCount == 0 ? 0 : (float)Round(Net * 100 / QuestionCount);
+		[DataMember] public float SuccessPercent => CalculateSuccessPercent();
 
 		[DataMember]
 		public float ClassroomAverageNet => Sections
@@ -233,6 +233,18 @@
 			{
 				section.Evaluate(incorrectEliminationRate);
 			}
+		}
+
+		private float CalculateSuccessPercent()
+		{
+			if (QuestionCount == 0)
+			{
+				return 0;
+			}
+
+			var percent = Net * 100 / QuestionCount;
+
+			return percent < 0 ? 0 : percent;
 		}
 
 		private void CalculateScore(List<ScoreFormula> scoreFormulas)

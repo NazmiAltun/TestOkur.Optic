@@ -1,4 +1,6 @@
-﻿namespace TestOkur.Optic.Tests
+﻿using System;
+
+namespace TestOkur.Optic.Tests
 {
 	using System.Collections.Generic;
 	using System.Linq;
@@ -46,7 +48,7 @@
 			studentForm.Evaluate(4, answerKeyForm.ScoreFormulas);
 			studentForm.Net.Should().Be(15.25f);
 			studentForm.Score.Should().Be(150.83f);
-			studentForm.SuccessPercent.Should().Be(13f);
+			Math.Round(studentForm.SuccessPercent).Should().Be(13f);
 		}
 
 		private List<AnswerKeyQuestionAnswer> ParseAnswers(string answers)
