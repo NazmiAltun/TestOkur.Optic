@@ -106,11 +106,11 @@
 			studentForms.First().Should().Match<StudentOpticalForm>(
 				x => x.Net == 95 &&
 					 x.Score == 416.68f &&
-					 x.SuccessPercent == 77.34f);
+					 x.SuccessPercent == 79);
 			studentForms.Last().Should().Match<StudentOpticalForm>(
 				x => x.Net == 60.5f &&
 					 x.Score == 301.66f &&
-					 x.SuccessPercent == 45.62f);
+					 x.SuccessPercent == 50);
 			studentForms.First().Orders
 				.First(o => o.Name == "NET")
 				.Should().Match<StudentOrder>(x =>

@@ -168,8 +168,8 @@
 			studentForm.WrongCount.Should().Be(8);
 			studentForm.EmptyCount.Should().Be(2);
 			studentForm.Net.Should().Be(3);
-			studentForm.SuccessPercent.Should().Be(20);
-			studentForm.Score.Should().Be(20);
+			studentForm.SuccessPercent.Should().Be(15);
+			studentForm.Score.Should().Be(15);
 		}
 
 		private AnswerKeyOpticalFormSection CreateSection(int lessonId, string lessonName, int count)

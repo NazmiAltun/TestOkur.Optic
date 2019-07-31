@@ -101,10 +101,7 @@
 		[DataMember]
 		public float Net => Sections.Select(s => s.Net).Sum();
 
-		[DataMember]
-		public float SuccessPercent => Sections == null ? 0 : (float)Round(
-										   Sections.Select(s => s.SuccessPercent).Average() *
-										   100) / 100;
+		[DataMember] public float SuccessPercent => QuestionCount == 0 ? 0 : (float)Round(Net * 100 / QuestionCount);
 
 		[DataMember]
 		public float ClassroomAverageNet => Sections
