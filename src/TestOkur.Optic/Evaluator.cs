@@ -50,7 +50,10 @@ namespace TestOkur.Optic
 
 			foreach (var form in forms)
 			{
-				FillMissingSections(form, answerFormKeyDict[form.Booklet]);
+				if (answerFormKeyDict.TryGetValue(form.Booklet, out var answerKeyForm))
+				{
+					FillMissingSections(form, answerKeyForm);
+				}
 			}
 		}
 
