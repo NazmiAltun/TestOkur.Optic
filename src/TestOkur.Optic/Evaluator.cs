@@ -107,8 +107,10 @@ namespace TestOkur.Optic
 
 			foreach (var form in forms)
 			{
-				var answerKeyForm = answerFormKeyDict[form.Booklet];
-				form.Evaluate(answerKeyForm.IncorrectEliminationRate, answerKeyForm.ScoreFormulas);
+				if (answerFormKeyDict.TryGetValue(form.Booklet, out var answerKeyForm))
+				{
+					form.Evaluate(answerKeyForm.IncorrectEliminationRate, answerKeyForm.ScoreFormulas);
+				}
 			}
 		}
 
