@@ -69,19 +69,19 @@
 		public int DistrictId { get; set; }
 
 		[DataMember]
-		public int GeneralAttendanceCount { get; set; }
+		public int GeneralAttendanceCount { get; private set; }
 
 		[DataMember]
-		public int CityAttendanceCount { get; internal set; }
+		public int CityAttendanceCount { get; private set; }
 
 		[DataMember]
-		public int DistrictAttendanceCount { get; internal set; }
+		public int DistrictAttendanceCount { get; private set; }
 
 		[DataMember]
-		public int SchoolAttendanceCount { get; internal set; }
+		public int SchoolAttendanceCount { get; private set; }
 
 		[DataMember]
-		public int ClassroomAttendanceCount { get; internal set; }
+		public int ClassroomAttendanceCount { get; private set; }
 
 		[DataMember]
 		public List<StudentOrder> Orders { get; private set; }
@@ -101,7 +101,8 @@
 		[DataMember]
 		public float Net => Sections.Select(s => s.Net).Sum();
 
-		[DataMember] public float SuccessPercent => CalculateSuccessPercent();
+		[DataMember]
+		public float SuccessPercent => CalculateSuccessPercent();
 
 		[DataMember]
 		public float ClassroomAverageNet => Sections
@@ -152,19 +153,19 @@
 		public float Score => Scores.Any() ? Scores.First().Value : SuccessPercent;
 
 		[DataMember]
-		public float ClassScoreAverage { get; internal set; }
+		public float ClassScoreAverage { get; set; }
 
 		[DataMember]
-		public float SchoolScoreAverage { get; internal set; }
+		public float SchoolScoreAverage { get; set; }
 
 		[DataMember]
-		public float DistrictScoreAverage { get; internal set; }
+		public float DistrictScoreAverage { get; set; }
 
 		[DataMember]
-		public float CityScoreAverage { get; internal set; }
+		public float CityScoreAverage { get; set; }
 
 		[DataMember]
-		public float GeneralScoreAverage { get; internal set; }
+		public float GeneralScoreAverage { get; set; }
 
 		public void SetFromScanOutput(ScanOutput scanOutput, AnswerKeyOpticalForm answerKeyOpticalForm)
 		{
@@ -205,16 +206,16 @@
 			CalculateScore(scoreFormulas);
 		}
 
-		internal bool ContainsSection(int lessonId) => Sections.Any(s => s.LessonId == lessonId);
+		public bool ContainsSection(int lessonId) => Sections.Any(s => s.LessonId == lessonId);
 
-		internal void ClearOrders() => Orders.Clear();
+		public void ClearOrders() => Orders.Clear();
 
-		internal void AddStudentOrder(StudentOrder item)
+		public void AddStudentOrder(StudentOrder item)
 		{
 			Orders.Add(item);
 		}
 
-		internal void AddEmptySection(AnswerKeyOpticalFormSection answerKeyOpticalFormSection)
+		public void AddEmptySection(AnswerKeyOpticalFormSection answerKeyOpticalFormSection)
 		{
 			var section = new StudentOpticalFormSection(
 				answerKeyOpticalFormSection.LessonId,
@@ -225,6 +226,28 @@
 					.ToList(),
 			};
 			Sections.Add(section);
+		}
+
+		public void SetAttendance(IReadOnlyCollection<StudentOpticalForm> forms)
+		{
+			GeneralAttendanceCount = forms.Count;
+			CityAttendanceCount = forms.Count(f => f.CityId == CityId);
+			DistrictAttendanceCount = forms.Count(f => f.DistrictId == DistrictId);
+			ClassroomAttendanceCount = forms.Count(f => f.ClassroomId == ClassroomId);
+			SchoolAttendanceCount = forms.Count(f => f.SchoolId == SchoolId);
+		}
+
+		public void SetAverages(IReadOnlyCollection<StudentOpticalForm> forms)
+		{
+			CityScoreAverage = forms.Where(f => f.CityId == CityId)
+				.Average(f => f.Score);
+			ClassScoreAverage = forms.Where(f => f.ClassroomId == ClassroomId)
+				.Average(f => f.Score);
+			DistrictScoreAverage = forms.Where(f => f.DistrictId == DistrictId)
+				.Average(f => f.Score);
+			GeneralScoreAverage = forms.Average(f => f.Score);
+			SchoolScoreAverage = forms.Where(f => f.SchoolId == SchoolId)
+				.Average(f => f.Score);
 		}
 
 		private void EvaluateSections(int incorrectEliminationRate)

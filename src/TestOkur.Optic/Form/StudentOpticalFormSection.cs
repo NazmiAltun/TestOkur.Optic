@@ -62,14 +62,14 @@
 
 		private int AnswerCount => Answers.Count(a => a.Result != QuestionAnswerResult.NoResult);
 
-		internal void Evaluate(int incorrectEliminationRate)
+		public void Evaluate(int incorrectEliminationRate)
 		{
 			CalculateResult(incorrectEliminationRate);
 		}
 
-		internal void ClearLessonAverages() => Averages.Clear();
+		public void ClearLessonAverages() => Averages.Clear();
 
-		internal void AddLessonAverage(Average average)
+		public void AddLessonAverage(Average average)
 		{
 			Averages.Add(average);
 		}
