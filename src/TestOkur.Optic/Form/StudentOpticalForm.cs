@@ -198,6 +198,11 @@
 			{
 				Sections.Add(section);
 			}
+
+			Sections = Sections
+				.OrderBy(s => s.FormPart)
+				.ThenBy(s => s.ListOrder)
+				.ToList();
 		}
 
 		public void Evaluate(int incorrectEliminationRate, List<ScoreFormula> scoreFormulas)
