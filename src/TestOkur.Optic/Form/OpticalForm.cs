@@ -40,6 +40,9 @@
 		public string ExamName { get; set; }
 
 		[DataMember]
+		public string ExamTypeName { get; set; }
+
+		[DataMember]
 		public char Booklet { get; set; }
 
 		[DataMember]
