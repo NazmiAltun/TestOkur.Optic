@@ -17,7 +17,7 @@
 			{
 				Sections = new List<StudentOpticalFormSection>()
 				{
-					new StudentOpticalFormSection(1, "Turkce")
+					new StudentOpticalFormSection(new AnswerKeyOpticalFormSection(1, "Turkce"))
 					{
 						Answers = new List<QuestionAnswer>()
 						{
@@ -26,7 +26,7 @@
 							new QuestionAnswer(3, 'C'),
 						}
 					},
-					new StudentOpticalFormSection(2, "Matematik")
+					new StudentOpticalFormSection(new AnswerKeyOpticalFormSection(2, "Matematik"))
 					{
 						Answers = new List<QuestionAnswer>()
 						{
@@ -41,7 +41,7 @@
 			};
 			var sections = new List<StudentOpticalFormSection>()
 			{
-				new StudentOpticalFormSection(1, "Turkce")
+				new StudentOpticalFormSection(new AnswerKeyOpticalFormSection(1, "Turkce"))
 				{
 					Answers = new List<QuestionAnswer>()
 					{
@@ -49,7 +49,7 @@
 						new QuestionAnswer(2, 'D')
 					}
 				},
-				new StudentOpticalFormSection(2, "Matematik")
+				new StudentOpticalFormSection(new AnswerKeyOpticalFormSection(2, "Matematik"))
 				{
 					Answers = new List<QuestionAnswer>()
 					{
@@ -58,7 +58,7 @@
 						new QuestionAnswer(3, 'E'),
 					}
 				},
-				new StudentOpticalFormSection(3, "Fen")
+				new StudentOpticalFormSection(new AnswerKeyOpticalFormSection(3, "Fen"))
 				{
 					Answers = new List<QuestionAnswer>()
 					{
@@ -87,8 +87,8 @@
 			var form = new StudentOpticalForm();
 			var sections = new List<StudentOpticalFormSection>()
 			{
-				new StudentOpticalFormSection(1, "Turkce"),
-				new StudentOpticalFormSection(2, "Matematik")
+				new StudentOpticalFormSection(new AnswerKeyOpticalFormSection(1, "Turkce")),
+				new StudentOpticalFormSection(new AnswerKeyOpticalFormSection(2, "Matematik"))
 			};
 			form.AddSections(sections);
 			form.Sections.Should()

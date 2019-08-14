@@ -8,11 +8,14 @@
 	[DataContract]
 	public class StudentOpticalFormSection : FormLessonSection
 	{
-		public StudentOpticalFormSection(int lessonId, string lessonName)
+		public StudentOpticalFormSection(AnswerKeyOpticalFormSection section)
 		 : this()
 		{
-			LessonName = lessonName;
-			LessonId = lessonId;
+			MaxQuestionCount = section.MaxQuestionCount;
+			ListOrder = section.ListOrder;
+			FormPart = section.FormPart;
+			LessonName = section.LessonName;
+			LessonId = section.LessonId;
 		}
 
 		public StudentOpticalFormSection()

@@ -173,7 +173,7 @@
 				.Sections
 				.Where(s => s.FormPart == scanOutput.FormPart))
 			{
-				var studentOpticalFormSection = new StudentOpticalFormSection(answerKeyOpticalFormSection.LessonId, answerKeyOpticalFormSection.LessonName);
+				var studentOpticalFormSection = new StudentOpticalFormSection(answerKeyOpticalFormSection);
 
 				for (var i = 0; i < answerKeyOpticalFormSection.MaxQuestionCount; i++)
 				{
@@ -217,9 +217,7 @@
 
 		public void AddEmptySection(AnswerKeyOpticalFormSection answerKeyOpticalFormSection)
 		{
-			var section = new StudentOpticalFormSection(
-				answerKeyOpticalFormSection.LessonId,
-				answerKeyOpticalFormSection.LessonName)
+			var section = new StudentOpticalFormSection(answerKeyOpticalFormSection)
 			{
 				Answers = answerKeyOpticalFormSection.Answers
 					.Select(a => new QuestionAnswer(a.QuestionNo, QuestionAnswer.Empty))
