@@ -296,7 +296,7 @@
 							formula.Coefficients
 								.Select(c => c.Coefficient * Sections.FirstOrDefault(s => s.LessonName == c.Lesson)?.Net ?? 0)
 								.Sum();
-				Scores.Add(formula.ScoreName.ToUpperInvariant(), (float)Round(score * 100) / 100);
+				Scores.Add(formula.ScoreName.ToUpper(), (float)Round(score * 100) / 100);
 			}
 		}
 	}
