@@ -21,7 +21,7 @@ namespace TestOkur.Optic.Tests
 				IncorrectEliminationRate = 0,
 				ScoreFormulas = new List<ScoreFormula>()
 				{
-					new ScoreFormula(100, "7 Sınıf")
+					new ScoreFormula(100, "LGS")
 					{
 						Coefficients = new List<LessonCoefficient>()
 						{
@@ -42,7 +42,7 @@ namespace TestOkur.Optic.Tests
 			var previousScore = studentForm.Scores.First().Value;
 			answerKeyOpticalForm.ScoreFormulas = new List<ScoreFormula>()
 			{
-				new ScoreFormula(100, "7 Sinif")
+				new ScoreFormula(100, "TYT")
 				{
 					Coefficients = new List<LessonCoefficient>()
 					{
