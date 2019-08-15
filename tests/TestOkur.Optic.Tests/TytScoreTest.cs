@@ -1,4 +1,5 @@
 ﻿using System;
+using TestOkur.Optic.Tests.Extensions;
 
 namespace TestOkur.Optic.Tests
 {
@@ -27,19 +28,19 @@ namespace TestOkur.Optic.Tests
 
 			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(1, "Turkish", 40, 1, 1)
 			{
-				Answers = ParseAnswers("CECBEEBADEEBACBDBBEDDAEDDACEABDEDCBDBABD")
+				Answers = "CECBEEBADEEBACBDBBEDDAEDDACEABDEDCBDBABD".ParseAnswers()
 			});
 			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(6, "Social Science", 20, 1, 2)
 			{
-				Answers = ParseAnswers("EAEADADECEEDCDEAEDBA")
+				Answers = "EAEADADECEEDCDEAEDBA".ParseAnswers()
 			});
 			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(5, "Basic Mathematics", 40, 2, 3)
 			{
-				Answers = ParseAnswers("DDBECACAACBCBECAEAADCDCDEDABAACCBDBAEDCB")
+				Answers = "DDBECACAACBCBECAEAADCDCDEDABAACCBDBAEDCB".ParseAnswers()
 			});
 			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(2, "Science", 20, 2, 4)
 			{
-				Answers = ParseAnswers("DBCCEEBAEECAACBBDECE")
+				Answers = "DBCCEEBAEECAACBBDECE".ParseAnswers()
 			});
 
 			var studentForm = new StudentOpticalForm('A');
@@ -49,11 +50,6 @@ namespace TestOkur.Optic.Tests
 			studentForm.Net.Should().Be(15.25f);
 			studentForm.Score.Should().Be(150.83f);
 			Math.Round(studentForm.SuccessPercent).Should().Be(13f);
-		}
-
-		private List<AnswerKeyQuestionAnswer> ParseAnswers(string answers)
-		{
-			return answers.Select((t, i) => new AnswerKeyQuestionAnswer(i + 1, t)).ToList();
 		}
 	}
 }

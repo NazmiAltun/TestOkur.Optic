@@ -167,6 +167,15 @@
 		[DataMember]
 		public float GeneralScoreAverage { get; set; }
 
+		public void UpdateCorrectAnswers(AnswerKeyOpticalForm answerKeyOpticalForm)
+		{
+			foreach (var answerKeyOpticalFormSection in answerKeyOpticalForm.Sections)
+			{
+				var section = Sections.FirstOrDefault(s => s.LessonName == answerKeyOpticalFormSection.LessonName);
+				section.UpdateAnswers(answerKeyOpticalFormSection);
+			}
+		}
+
 		public void SetFromScanOutput(ScanOutput scanOutput, AnswerKeyOpticalForm answerKeyOpticalForm)
 		{
 			foreach (var answerKeyOpticalFormSection in answerKeyOpticalForm

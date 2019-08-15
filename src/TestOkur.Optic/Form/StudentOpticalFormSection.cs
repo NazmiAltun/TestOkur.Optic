@@ -65,6 +65,16 @@
 
 		private int AnswerCount => Answers.Count(a => a.Result != QuestionAnswerResult.NoResult);
 
+		public void UpdateAnswers(AnswerKeyOpticalFormSection section)
+		{
+			foreach (var answer in section.Answers)
+			{
+				Answers
+					.FirstOrDefault(a => a.QuestionNo == answer.QuestionNo)
+					?.SetCorrectAnswer(answer);
+			}
+		}
+
 		public void Evaluate(int incorrectEliminationRate)
 		{
 			CalculateResult(incorrectEliminationRate);

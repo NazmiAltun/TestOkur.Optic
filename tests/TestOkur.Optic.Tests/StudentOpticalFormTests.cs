@@ -1,4 +1,6 @@
-﻿namespace TestOkur.Optic.Tests
+﻿using TestOkur.Optic.Tests.Extensions;
+
+namespace TestOkur.Optic.Tests
 {
 	using System.Collections.Generic;
 	using System.Linq;
@@ -10,6 +12,28 @@
 
 	public class StudentOpticalFormTests
 	{
+		[Fact]
+		public void Given_UpdateAnswers_WhenAnyCorrectAnswerChanged_Then_ResultsShouldChange()
+		{
+			var answerKeyForm = new AnswerKeyOpticalForm('A', null);
+			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(1, "Mat", 3, 1, 1)
+			{
+				Answers = "AAA".ParseAnswers()
+			});
+			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(2, "TR", 3, 1, 2)
+			{
+				Answers = "BBB".ParseAnswers()
+			});
+			var form = new StudentOpticalForm('A');
+			form.SetFromScanOutput(new ScanOutput("AAABBB", 1), answerKeyForm);
+			form.Evaluate(0, null);
+			form.CorrectCount.Should().Be(6);
+			answerKeyForm.Sections.First().Answers = "CCC".ParseAnswers();
+			form.UpdateCorrectAnswers(answerKeyForm);
+			form.Evaluate(0,null);
+			form.CorrectCount.Should().Be(3);
+		}
+
 		[Fact]
 		public void Given_AddSections_When_SectionsExist_Then_Sections_ShouldBeOverriden()
 		{
