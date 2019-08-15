@@ -13,6 +13,50 @@ namespace TestOkur.Optic.Tests
 	public class StudentOpticalFormTests
 	{
 		[Fact]
+		public void Give_Evaluate_When_FormulaChanges_ThenCalculatedFormulas_Should_Be_Changed()
+		{
+			var answerKeyOpticalForm = new AnswerKeyOpticalForm
+			{
+				Booklet = 'A',
+				IncorrectEliminationRate = 0,
+				ScoreFormulas = new List<ScoreFormula>()
+				{
+					new ScoreFormula(100, "7 Sınıf")
+					{
+						Coefficients = new List<LessonCoefficient>()
+						{
+							new LessonCoefficient("Tr", 4),
+							new LessonCoefficient("Math",3)
+						}
+					}
+				}
+			};
+			answerKeyOpticalForm.AddSection(CreateSection(1, "Tr", 3));
+			answerKeyOpticalForm.AddSection(CreateSection(2, "Math", 3));
+
+			var answers = Enumerable.Repeat('A', 6);
+			var studentForm = new StudentOpticalForm('A');
+			studentForm.SetFromScanOutput(new ScanOutput(answers, 0), answerKeyOpticalForm);
+			studentForm.Evaluate(0, answerKeyOpticalForm.ScoreFormulas);
+			var previousScoreName = studentForm.Scores.First().Key;
+			var previousScore = studentForm.Scores.First().Value;
+			answerKeyOpticalForm.ScoreFormulas = new List<ScoreFormula>()
+			{
+				new ScoreFormula(100, "7 Sinif")
+				{
+					Coefficients = new List<LessonCoefficient>()
+					{
+						new LessonCoefficient("Tr", 1),
+						new LessonCoefficient("Math", 1)
+					}
+				}
+			};
+			studentForm.Evaluate(0, answerKeyOpticalForm.ScoreFormulas);
+			studentForm.Scores.First().Key.Should().NotBe(previousScoreName);
+			studentForm.Scores.First().Value.Should().NotBe(previousScore);
+		}
+
+		[Fact]
 		public void Given_UpdateAnswers_WhenAnyCorrectAnswerChanged_Then_ResultsShouldChange()
 		{
 			var answerKeyForm = new AnswerKeyOpticalForm('A', null);
@@ -30,7 +74,7 @@ namespace TestOkur.Optic.Tests
 			form.CorrectCount.Should().Be(6);
 			answerKeyForm.Sections.First().Answers = "CCC".ParseAnswers();
 			form.UpdateCorrectAnswers(answerKeyForm);
-			form.Evaluate(0,null);
+			form.Evaluate(0, null);
 			form.CorrectCount.Should().Be(3);
 		}
 

@@ -167,9 +167,6 @@
 		[DataMember]
 		public float GeneralScoreAverage { get; set; }
 
-		[DataMember]
-		public int ClassroomGrade { get; set; }
-
 		public void UpdateCorrectAnswers(AnswerKeyOpticalForm answerKeyOpticalForm)
 		{
 			foreach (var answerKeyOpticalFormSection in answerKeyOpticalForm.Sections)

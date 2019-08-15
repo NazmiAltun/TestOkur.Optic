@@ -8,10 +8,9 @@
 	[DataContract]
 	public class ScoreFormula
 	{
-		public ScoreFormula(float basePoint, string scoreName, int grade)
+		public ScoreFormula(float basePoint, string scoreName)
 		{
 			BasePoint = basePoint;
-			Grade = grade;
 			ScoreName = scoreName.Replace(".", string.Empty);
 			Coefficients = new List<LessonCoefficient>();
 		}
@@ -21,9 +20,6 @@
 
 		[DataMember]
 		public string ScoreName { get; private set; }
-
-		[DataMember]
-		public int Grade { get; private set; }
 
 		[DataMember]
 		public List<LessonCoefficient> Coefficients { get; set; }
