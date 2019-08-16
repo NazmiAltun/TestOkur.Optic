@@ -50,6 +50,11 @@
 
 		private void SetResult()
 		{
+			if (CorrectAnswer == Empty || CorrectAnswer == '\0')
+			{
+				return;
+			}
+
 			if (Answer == Empty)
 			{
 				Result = QuestionAnswerResult.Empty;
