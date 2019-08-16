@@ -45,7 +45,7 @@
 
 		[DataMember]
 		public List<AnswerKeyQuestionAnswer> Answers { get; set; }
-
+		
 		public void AddAnswer(AnswerKeyQuestionAnswer answerKeyQuestionAnswer)
 		{
 			Answers.Add(answerKeyQuestionAnswer);

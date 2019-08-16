@@ -185,9 +185,9 @@
 			{
 				var studentOpticalFormSection = new StudentOpticalFormSection(answerKeyOpticalFormSection);
 
-				for (var i = 0; i < answerKeyOpticalFormSection.MaxQuestionCount; i++)
+				for (var i = 0; i < answerKeyOpticalFormSection.Answers.Count; i++)
 				{
-					var correctAnswer = answerKeyOpticalFormSection.Answers.ElementAtOrDefault(i);
+					var correctAnswer = answerKeyOpticalFormSection.Answers.ElementAt(i);
 					var questionAnswer = new QuestionAnswer(i + 1, scanOutput.Next());
 					questionAnswer.SetCorrectAnswer(correctAnswer);
 					studentOpticalFormSection.Answers.Add(questionAnswer);
