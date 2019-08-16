@@ -13,6 +13,23 @@ namespace TestOkur.Optic.Tests
 	public class StudentOpticalFormTests
 	{
 		[Fact]
+		public void EmptyCorrectAnswers_Should_NotAddedToScoreAndSuccessPercentCalculations()
+		{
+			var studentOpticalForm = new StudentOpticalForm()
+			{
+				Sections = new List<StudentOpticalFormSection>
+				{
+					new StudentOpticalFormSection()
+					{
+						Answers =  "ABCDA CDAA".ParseStudentAnswers("ABCDA CDAA")
+					}
+				}
+			};
+			studentOpticalForm.Evaluate(0, null);
+			studentOpticalForm.Score.Should().Be(100);
+			studentOpticalForm.SuccessPercent.Should().Be(100);
+		}
+		[Fact]
 		public void Give_Evaluate_When_FormulaChanges_ThenCalculatedFormulas_Should_Be_Changed()
 		{
 			var answerKeyOpticalForm = new AnswerKeyOpticalForm
@@ -62,17 +79,17 @@ namespace TestOkur.Optic.Tests
 			var answerKeyForm = new AnswerKeyOpticalForm('A', null);
 			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(1, "Mat", 3, 1, 1)
 			{
-				Answers = "AAA".ParseAnswers()
+				Answers = "AAA".ParseAnswerkeyAnswers()
 			});
 			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(2, "TR", 3, 1, 2)
 			{
-				Answers = "BBB".ParseAnswers()
+				Answers = "BBB".ParseAnswerkeyAnswers()
 			});
 			var form = new StudentOpticalForm('A');
 			form.SetFromScanOutput(new ScanOutput("AAABBB", 1), answerKeyForm);
 			form.Evaluate(0, null);
 			form.CorrectCount.Should().Be(6);
-			answerKeyForm.Sections.First().Answers = "CCC".ParseAnswers();
+			answerKeyForm.Sections.First().Answers = "CCC".ParseAnswerkeyAnswers();
 			form.UpdateCorrectAnswers(answerKeyForm);
 			form.Evaluate(0, null);
 			form.CorrectCount.Should().Be(3);

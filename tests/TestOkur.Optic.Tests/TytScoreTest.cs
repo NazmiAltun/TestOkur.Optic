@@ -28,19 +28,19 @@ namespace TestOkur.Optic.Tests
 
 			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(1, "Turkish", 40, 1, 1)
 			{
-				Answers = "CECBEEBADEEBACBDBBEDDAEDDACEABDEDCBDBABD".ParseAnswers()
+				Answers = "CECBEEBADEEBACBDBBEDDAEDDACEABDEDCBDBABD".ParseAnswerkeyAnswers()
 			});
 			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(6, "Social Science", 20, 1, 2)
 			{
-				Answers = "EAEADADECEEDCDEAEDBA".ParseAnswers()
+				Answers = "EAEADADECEEDCDEAEDBA".ParseAnswerkeyAnswers()
 			});
 			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(5, "Basic Mathematics", 40, 2, 3)
 			{
-				Answers = "DDBECACAACBCBECAEAADCDCDEDABAACCBDBAEDCB".ParseAnswers()
+				Answers = "DDBECACAACBCBECAEAADCDCDEDABAACCBDBAEDCB".ParseAnswerkeyAnswers()
 			});
 			answerKeyForm.AddSection(new AnswerKeyOpticalFormSection(2, "Science", 20, 2, 4)
 			{
-				Answers = "DBCCEEBAEECAACBBDECE".ParseAnswers()
+				Answers = "DBCCEEBAEECAACBBDECE".ParseAnswerkeyAnswers()
 			});
 
 			var studentForm = new StudentOpticalForm('A');

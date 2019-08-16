@@ -96,7 +96,8 @@
 		public int CorrectCount => Sections.Select(s => s.CorrectCount).Sum();
 
 		[DataMember]
-		public int QuestionCount => Sections.SelectMany(s => s.Answers).Count();
+		public int QuestionCount => Sections.SelectMany(s => s.Answers)
+			.Count(q => q.CorrectAnswer != QuestionAnswer.Empty);
 
 		[DataMember]
 		public float Net => Sections.Select(s => s.Net).Sum();
