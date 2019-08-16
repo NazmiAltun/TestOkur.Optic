@@ -172,8 +172,9 @@
 		{
 			foreach (var answerKeyOpticalFormSection in answerKeyOpticalForm.Sections)
 			{
-				var section = Sections.FirstOrDefault(s => s.LessonName == answerKeyOpticalFormSection.LessonName);
-				section.UpdateAnswers(answerKeyOpticalFormSection);
+				Sections
+					.FirstOrDefault(s => s.LessonName == answerKeyOpticalFormSection.LessonName)
+					?.UpdateAnswers(answerKeyOpticalFormSection);
 			}
 		}
 
