@@ -54,7 +54,8 @@
 			int questionNoBookletB,
 			int questionNoBookletC,
 			int questionNoBookletD,
-			char answer)
+			char answer,
+			QuestionAnswerCancelAction questionAnswerCancelAction)
 		{
 			if (!Sections.Contains(section))
 			{
@@ -63,10 +64,10 @@
 
 			Sections
 				.First(s => s.LessonName == section.LessonName)
-				.AddAnswer(new AnswerKeyQuestionAnswer(questionNo, questionNoBookletB, questionNoBookletC, questionNoBookletD, answer));
+				.AddAnswer(new AnswerKeyQuestionAnswer(questionNo, questionNoBookletB, questionNoBookletC, questionNoBookletD, answer, questionAnswerCancelAction));
 		}
 
-		public void AddAnswer(AnswerKeyOpticalFormSection section, int questionNo, QuestionAnswer questionAnswer)
+		public void AddAnswer(AnswerKeyOpticalFormSection section, int questionNo, AnswerKeyQuestionAnswer questionAnswer)
 		{
 			if (!Sections.Contains(section))
 			{
@@ -86,7 +87,7 @@
 			{
 				foreach (var answer in section.Answers)
 				{
-					formDictionary['A'].AddAnswer(section, answer.QuestionNo, answer.QuestionNoBookletB, answer.QuestionNoBookletC, answer.QuestionNoBookletD, answer.Answer);
+					formDictionary['A'].AddAnswer(section, answer.QuestionNo, answer.QuestionNoBookletB, answer.QuestionNoBookletC, answer.QuestionNoBookletD, answer.Answer, answer.QuestionAnswerCancelAction);
 					formDictionary['B'].AddAnswer(section, answer.QuestionNoBookletB, answer);
 					formDictionary['C'].AddAnswer(section, answer.QuestionNoBookletC, answer);
 					formDictionary['D'].AddAnswer(section, answer.QuestionNoBookletD, answer);

@@ -16,8 +16,9 @@
 
 		public AnswerKeyQuestionAnswer(
 			int questionNo,
-			QuestionAnswer questionAnswer)
+			AnswerKeyQuestionAnswer questionAnswer)
 		{
+			QuestionAnswerCancelAction = questionAnswer.QuestionAnswerCancelAction;
 			QuestionNo = questionNo;
 			Answer = questionAnswer.Answer;
 			SubjectName = questionAnswer.SubjectName;
@@ -30,12 +31,24 @@
 			int questionNoBookletC,
 			int questionNoBookletD,
 			char answer)
+            : this(questionNo, questionNoBookletB, questionNoBookletC, questionNoBookletD, answer, QuestionAnswerCancelAction.None)
+		{
+		}
+
+		public AnswerKeyQuestionAnswer(
+			int questionNo,
+			int questionNoBookletB,
+			int questionNoBookletC,
+			int questionNoBookletD,
+			char answer,
+			QuestionAnswerCancelAction questionAnswerCancelAction)
 		{
 			QuestionNo = questionNo;
 			QuestionNoBookletB = questionNoBookletB;
 			QuestionNoBookletC = questionNoBookletC;
 			QuestionNoBookletD = questionNoBookletD;
 			Answer = answer;
+			QuestionAnswerCancelAction = questionAnswerCancelAction;
 		}
 
 		public int QuestionNoBookletB { get; set; }

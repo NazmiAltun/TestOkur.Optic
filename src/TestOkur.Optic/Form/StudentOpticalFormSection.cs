@@ -37,7 +37,7 @@
 		public int CorrectCount { get; set; }
 
 		[DataMember]
-		public int QuestionCount => Answers.Count;
+		public int QuestionCount => Answers.Count(a => a.Result != QuestionAnswerResult.NoResult);
 
 		[DataMember]
 		public float Net { get; set; }
