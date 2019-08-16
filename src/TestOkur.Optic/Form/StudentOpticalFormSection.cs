@@ -63,7 +63,8 @@
 		[DataMember]
 		public float GeneralAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.General ?? 0;
 
-		private int AnswerCount => Answers.Count(a => a.Result != QuestionAnswerResult.NoResult);
+		private int AnswerCount => Answers.Count(a => a.Result != QuestionAnswerResult.NoResult &&
+													  a.CorrectAnswer != QuestionAnswer.Empty);
 
 		public void UpdateAnswers(AnswerKeyOpticalFormSection section)
 		{
