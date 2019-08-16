@@ -68,6 +68,11 @@
 
 		public void UpdateAnswers(AnswerKeyOpticalFormSection section)
 		{
+			if (section == null)
+			{
+				return;
+			}
+
 			foreach (var answer in section.Answers)
 			{
 				Answers
