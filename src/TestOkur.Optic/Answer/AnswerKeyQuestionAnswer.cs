@@ -30,8 +30,10 @@
 			int questionNoBookletB,
 			int questionNoBookletC,
 			int questionNoBookletD,
-			char answer)
-            : this(questionNo, questionNoBookletB, questionNoBookletC, questionNoBookletD, answer, QuestionAnswerCancelAction.None)
+			char answer,
+			int subjectId,
+			string subjectName)
+			: this(questionNo, questionNoBookletB, questionNoBookletC, questionNoBookletD, answer, subjectId, subjectName, QuestionAnswerCancelAction.None)
 		{
 		}
 
@@ -41,6 +43,8 @@
 			int questionNoBookletC,
 			int questionNoBookletD,
 			char answer,
+			int subjectId,
+			string subjectName,
 			QuestionAnswerCancelAction questionAnswerCancelAction)
 		{
 			QuestionNo = questionNo;
@@ -49,6 +53,8 @@
 			QuestionNoBookletD = questionNoBookletD;
 			Answer = answer;
 			QuestionAnswerCancelAction = questionAnswerCancelAction;
+			SubjectId = subjectId;
+			SubjectName = subjectName;
 		}
 
 		public int QuestionNoBookletB { get; set; }

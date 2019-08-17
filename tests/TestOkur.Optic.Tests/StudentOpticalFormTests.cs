@@ -228,21 +228,21 @@ namespace TestOkur.Optic.Tests
 			{
 				Answers = new List<AnswerKeyQuestionAnswer>()
 				{
-					new AnswerKeyQuestionAnswer(1, 0, 0, 0, 'A'),
-					new AnswerKeyQuestionAnswer(2, 0, 0, 0, 'B'),
-					new AnswerKeyQuestionAnswer(3, 0, 0, 0, 'C'),
-					new AnswerKeyQuestionAnswer(4, 0, 0, 0, 'D'),
-					new AnswerKeyQuestionAnswer(5, 0, 0, 0, 'E'),
-					new AnswerKeyQuestionAnswer(6, 0, 0, 0, 'A'),
-					new AnswerKeyQuestionAnswer(7, 0, 0, 0, 'B'),
-					new AnswerKeyQuestionAnswer(8, 0, 0, 0, 'C'),
-					new AnswerKeyQuestionAnswer(9, 0, 0, 0, 'D'),
-					new AnswerKeyQuestionAnswer(10, 0, 0, 0, 'E'),
-					new AnswerKeyQuestionAnswer(11, 0, 0, 0, 'B'),
-					new AnswerKeyQuestionAnswer(12, 0, 0, 0, 'C'),
-					new AnswerKeyQuestionAnswer(13, 0, 0, 0, 'A'),
-					new AnswerKeyQuestionAnswer(14, 0, 0, 0, 'A'),
-					new AnswerKeyQuestionAnswer(15, 0, 0, 0, 'A'),
+					new AnswerKeyQuestionAnswer(1, 0, 0, 0, 'A',0,string.Empty),
+					new AnswerKeyQuestionAnswer(2, 0, 0, 0, 'B',0,string.Empty),
+					new AnswerKeyQuestionAnswer(3, 0, 0, 0, 'C',0,string.Empty),
+					new AnswerKeyQuestionAnswer(4, 0, 0, 0, 'D',0,string.Empty),
+					new AnswerKeyQuestionAnswer(5, 0, 0, 0, 'E',0,string.Empty),
+					new AnswerKeyQuestionAnswer(6, 0, 0, 0, 'A',0,string.Empty),
+					new AnswerKeyQuestionAnswer(7, 0, 0, 0, 'B',0,string.Empty),
+					new AnswerKeyQuestionAnswer(8, 0, 0, 0, 'C',0,string.Empty),
+					new AnswerKeyQuestionAnswer(9, 0, 0, 0, 'D',0,string.Empty),
+					new AnswerKeyQuestionAnswer(10, 0, 0, 0, 'E',0,string.Empty),
+					new AnswerKeyQuestionAnswer(11, 0, 0, 0, 'B',0,string.Empty),
+					new AnswerKeyQuestionAnswer(12, 0, 0, 0, 'C',0,string.Empty),
+					new AnswerKeyQuestionAnswer(13, 0, 0, 0, 'A',0,string.Empty),
+					new AnswerKeyQuestionAnswer(14, 0, 0, 0, 'A',0,string.Empty),
+					new AnswerKeyQuestionAnswer(15, 0, 0, 0, 'A',0,string.Empty),
 				}
 			});
 
@@ -263,7 +263,7 @@ namespace TestOkur.Optic.Tests
 
 			for (var i = 0; i < count; i++)
 			{
-				list.Add(new AnswerKeyQuestionAnswer(i + 1, 0, 0, 0, 'A'));
+				list.Add(new AnswerKeyQuestionAnswer(i + 1, 0, 0, 0, 'A', 0, string.Empty));
 			}
 
 			return new AnswerKeyOpticalFormSection(lessonId, lessonName, count, default, default)

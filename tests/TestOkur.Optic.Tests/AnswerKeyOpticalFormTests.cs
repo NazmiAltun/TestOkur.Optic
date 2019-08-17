@@ -26,9 +26,9 @@
 			{
 				Answers = new List<AnswerKeyQuestionAnswer>()
 				{
-					new AnswerKeyQuestionAnswer(1, 0, 0, 0, 'A'),
-					new AnswerKeyQuestionAnswer(2, 0, 0, 0, 'B'),
-					new AnswerKeyQuestionAnswer(3, 0, 0, 0, 'C'),
+					new AnswerKeyQuestionAnswer(1, 0, 0, 0, 'A',0,string.Empty),
+					new AnswerKeyQuestionAnswer(2, 0, 0, 0, 'B',0,string.Empty),
+					new AnswerKeyQuestionAnswer(3, 0, 0, 0, 'C',0,string.Empty),
 				}
 			});
 
@@ -61,14 +61,14 @@
 				{
 					Answers = new List<AnswerKeyQuestionAnswer>()
 					{
-						new AnswerKeyQuestionAnswer(1, 2, 3, 4, 'A'),
-						new AnswerKeyQuestionAnswer(2, 3, 4, 1, 'B'),
-						new AnswerKeyQuestionAnswer(3, 4, 1, 2, 'C'),
-						new AnswerKeyQuestionAnswer(4, 1, 2, 3, 'D'),
-						new AnswerKeyQuestionAnswer(5, 6, 7, 8, 'A'),
-						new AnswerKeyQuestionAnswer(6, 7, 8, 5, 'C'),
-						new AnswerKeyQuestionAnswer(7, 8, 5, 6, 'B'),
-						new AnswerKeyQuestionAnswer(8, 5, 6, 7, 'A'),
+						new AnswerKeyQuestionAnswer(1, 2, 3, 4, 'A',0,string.Empty),
+						new AnswerKeyQuestionAnswer(2, 3, 4, 1, 'B',0,string.Empty),
+						new AnswerKeyQuestionAnswer(3, 4, 1, 2, 'C',0,string.Empty),
+						new AnswerKeyQuestionAnswer(4, 1, 2, 3, 'D',0,string.Empty),
+						new AnswerKeyQuestionAnswer(5, 6, 7, 8, 'A',0,string.Empty),
+						new AnswerKeyQuestionAnswer(6, 7, 8, 5, 'C',0,string.Empty),
+						new AnswerKeyQuestionAnswer(7, 8, 5, 6, 'B',0,string.Empty),
+						new AnswerKeyQuestionAnswer(8, 5, 6, 7, 'A',0,string.Empty),
 					}
 				});
 
