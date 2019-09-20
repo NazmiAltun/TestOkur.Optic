@@ -21,5 +21,10 @@
 		{
 			return _index == Answers.Length ? ' ' : Answers[_index++];
 		}
+
+        public void Skip(int count)
+        {
+            _index += count;
+        }
 	}
 }
