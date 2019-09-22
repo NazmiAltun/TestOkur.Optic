@@ -33,6 +33,9 @@
         public List<StudentOpticalFormSection> Sections { get; set; }
 
         [DataMember]
+        public List<StudentSubjectDetail> StudentSubjectDetails { get; private set; }
+
+        [DataMember]
         public Dictionary<string, float> Scores { get; private set; }
 
         [DataMember]
@@ -221,6 +224,7 @@
         {
             EvaluateSections(incorrectEliminationRate);
             CalculateScore(scoreFormulas);
+            SetSubjectDetails();
         }
 
         public bool ContainsSection(int lessonId) => Sections.Any(s => s.LessonId == lessonId);
@@ -283,6 +287,25 @@
             var percent = Net * 100 / QuestionCount;
 
             return percent < 0 ? 0 : percent;
+        }
+
+        private void SetSubjectDetails()
+        {
+            StudentSubjectDetails = Sections
+                .SelectMany(s => s.Answers, (s, a) => new { s.LessonName, a })
+                .GroupBy(x => x.a.SubjectName)
+                .Select(x => new StudentSubjectDetail(
+                    x.First().LessonName,
+                    x.Key,
+                    string.Join(", ", x.Select(y => y.a.QuestionNo)),
+                    x.Count(y => y.a.Result == QuestionAnswerResult.Correct),
+                    x.Count(y => y.a.Result == QuestionAnswerResult.Wrong ||
+                                 y.a.Result == QuestionAnswerResult.Invalid),
+                    x.Count(y => y.a.Result == QuestionAnswerResult.Empty)))
+                .OrderBy(s => s.Lesson)
+                .ThenByDescending(s => s.QuestionNos.Length)
+                .ThenByDescending(s => s.SuccessPercent)
+                .ToList();
         }
 
         private void CalculateScore(List<ScoreFormula> scoreFormulas)
