@@ -47,7 +47,7 @@
 				IncorrectEliminationRate = 4,
 				ScoreFormulas = new List<ScoreFormula>()
 				{
-					new ScoreFormula(100, "TYT")
+					new ScoreFormula(100, "TYT",11)
 					{
 						Coefficients = new List<LessonCoefficient>()
 						{

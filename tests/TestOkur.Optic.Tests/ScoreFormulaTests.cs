@@ -9,7 +9,7 @@ namespace TestOkur.Optic.Tests
 		[Fact]
 		public void DotShouldBeReplacedWithAWhiteSpaceInScoreName()
 		{
-			var formula = new ScoreFormula(200, "5. Grade");
+			var formula = new ScoreFormula(200, "5. Grade",5);
 			formula.ScoreName.Should().Be("5 Grade");
 		}
 	}

@@ -163,6 +163,9 @@
         public float SchoolScoreAverage { get; set; }
 
         [DataMember]
+        public int Grade { get; set; }
+
+        [DataMember]
         public float DistrictScoreAverage { get; set; }
 
         [DataMember]
