@@ -3,7 +3,7 @@
     <TargetFramework>netstandard1.3</TargetFramework>
 	<AssemblyVersion>1.0.67.0</AssemblyVersion>
 	<CodeAnalysisRuleSet>..\..\StyleCopRules.ruleset</CodeAnalysisRuleSet>
-    <Version>1.0.68</Version>
+    <Version>1.0.69</Version>
     <Copyright>Nazmi Altun</Copyright>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/NazmiAltun/TestOkur.Optic</RepositoryUrl>

@@ -319,8 +319,15 @@
             }
 
             Scores.Clear();
-            foreach (var formula in scoreFormulas
-                .Where(s => s.Grade == Grade || s.Grade >= 9))
+            var filteredScoreFormulas = scoreFormulas
+                .Where(s => s.Grade == Grade).ToList();
+
+            if (filteredScoreFormulas.Count == 0)
+            {
+                filteredScoreFormulas = scoreFormulas;
+            }
+
+            foreach (var formula in filteredScoreFormulas)
             {
                 var score = formula.BasePoint +
                             formula.Coefficients
