@@ -53,6 +53,7 @@ namespace TestOkur.Optic.Tests
 
             var answers = Enumerable.Repeat('A', 6);
             var studentForm = new StudentOpticalForm('A');
+            studentForm.Grade = 8;
             studentForm.SetFromScanOutput(new ScanOutput(answers, 0), answerKeyOpticalForm);
             studentForm.Evaluate(0, answerKeyOpticalForm.ScoreFormulas);
             var previousScoreName = studentForm.Scores.First().Key;
