@@ -272,6 +272,32 @@
                 .Average(f => f.Score);
         }
 
+        public void CalculateScore(List<ScoreFormula> scoreFormulas)
+        {
+            if (scoreFormulas == null)
+            {
+                return;
+            }
+
+            Scores.Clear();
+            var filteredScoreFormulas = scoreFormulas
+                .Where(s => s.Grade == Grade).ToList();
+
+            if (filteredScoreFormulas.Count == 0)
+            {
+                filteredScoreFormulas = scoreFormulas;
+            }
+
+            foreach (var formula in filteredScoreFormulas)
+            {
+                var score = formula.BasePoint +
+                            formula.Coefficients
+                                .Select(c => c.Coefficient * Sections.FirstOrDefault(s => s.LessonName == c.Lesson)?.Net ?? 0)
+                                .Sum();
+                Scores.Add(formula.ScoreName.ToUpper(), (float)Round(score * 100) / 100);
+            }
+        }
+
         private void EvaluateSections(int incorrectEliminationRate)
         {
             foreach (var section in Sections)
@@ -309,32 +335,6 @@
                 .ThenByDescending(s => s.QuestionNos.Length)
                 .ThenByDescending(s => s.SuccessPercent)
                 .ToList();
-        }
-
-        private void CalculateScore(List<ScoreFormula> scoreFormulas)
-        {
-            if (scoreFormulas == null)
-            {
-                return;
-            }
-
-            Scores.Clear();
-            var filteredScoreFormulas = scoreFormulas
-                .Where(s => s.Grade == Grade).ToList();
-
-            if (filteredScoreFormulas.Count == 0)
-            {
-                filteredScoreFormulas = scoreFormulas;
-            }
-
-            foreach (var formula in filteredScoreFormulas)
-            {
-                var score = formula.BasePoint +
-                            formula.Coefficients
-                                .Select(c => c.Coefficient * Sections.FirstOrDefault(s => s.LessonName == c.Lesson)?.Net ?? 0)
-                                .Sum();
-                Scores.Add(formula.ScoreName.ToUpper(), (float)Round(score * 100) / 100);
-            }
         }
     }
 }
