@@ -272,7 +272,15 @@
                 .Average(f => f.Score);
         }
 
-        public void CalculateScore(List<ScoreFormula> scoreFormulas)
+        private void EvaluateSections(int incorrectEliminationRate)
+        {
+            foreach (var section in Sections)
+            {
+                section.Evaluate(incorrectEliminationRate);
+            }
+        }
+
+        private void CalculateScore(List<ScoreFormula> scoreFormulas)
         {
             if (scoreFormulas == null)
             {
@@ -295,14 +303,6 @@
                                 .Select(c => c.Coefficient * Sections.FirstOrDefault(s => s.LessonName == c.Lesson)?.Net ?? 0)
                                 .Sum();
                 Scores.Add(formula.ScoreName.ToUpper(), (float)Round(score * 100) / 100);
-            }
-        }
-
-        private void EvaluateSections(int incorrectEliminationRate)
-        {
-            foreach (var section in Sections)
-            {
-                section.Evaluate(incorrectEliminationRate);
             }
         }
 
@@ -331,6 +331,7 @@
                     x.Count(y => y.a.Result == QuestionAnswerResult.Wrong ||
                                  y.a.Result == QuestionAnswerResult.Invalid),
                     x.Count(y => y.a.Result == QuestionAnswerResult.Empty)))
+                .Where(s => !string.IsNullOrEmpty(s.Subject))
                 .OrderBy(s => s.Lesson)
                 .ThenByDescending(s => s.QuestionNos.Length)
                 .ThenByDescending(s => s.SuccessPercent)
