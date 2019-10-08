@@ -43,6 +43,9 @@
 		[DataMember]
 		public List<ScoreFormula> ScoreFormulas { get; set; }
 
+        [DataMember]
+		public bool SharedExam { get; set; }
+
 		public void AddSection(AnswerKeyOpticalFormSection section)
 		{
 			Sections.Add(section);
