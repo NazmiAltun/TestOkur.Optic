@@ -174,6 +174,9 @@
         [DataMember]
         public float GeneralScoreAverage { get; set; }
 
+        [DataMember]
+        public ScanOutput ScanOutput { get; set; }
+
         public void UpdateCorrectAnswers(AnswerKeyOpticalForm answerKeyOpticalForm)
         {
             foreach (var answerKeyOpticalFormSection in answerKeyOpticalForm.Sections)
@@ -186,6 +189,7 @@
 
         public void SetFromScanOutput(ScanOutput scanOutput, AnswerKeyOpticalForm answerKeyOpticalForm)
         {
+            ScanOutput = scanOutput;
             foreach (var answerKeyOpticalFormSection in answerKeyOpticalForm
                 .Sections
                 .Where(s => s.FormPart == scanOutput.FormPart))
