@@ -45,6 +45,9 @@
         public int StudentNumber { get; set; }
 
         [DataMember]
+        public string CitizenshipIdentity { get; set; }
+
+        [DataMember]
         public string StudentFirstName { get; set; }
 
         [DataMember]
