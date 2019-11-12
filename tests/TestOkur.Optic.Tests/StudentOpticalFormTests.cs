@@ -1,4 +1,5 @@
-﻿using TestOkur.Optic.Tests.Extensions;
+﻿using System;
+using TestOkur.Optic.Tests.Extensions;
 
 namespace TestOkur.Optic.Tests
 {
@@ -51,10 +52,11 @@ namespace TestOkur.Optic.Tests
             answerKeyOpticalForm.AddSection(CreateSection(1, "Tr", 3));
             answerKeyOpticalForm.AddSection(CreateSection(2, "Math", 3));
 
+            var random = new Random();
             var answers = Enumerable.Repeat('A', 6);
             var studentForm = new StudentOpticalForm('A');
             studentForm.Grade = 8;
-            studentForm.SetFromScanOutput(new ScanOutput(answers, 0), answerKeyOpticalForm);
+            studentForm.SetFromScanOutput(new ScanOutput(answers, 0,random.Next(1000),'A'), answerKeyOpticalForm);
             studentForm.Evaluate(0, answerKeyOpticalForm.ScoreFormulas);
             var previousScoreName = studentForm.Scores.First().Key;
             var previousScore = studentForm.Scores.First().Value;
@@ -87,7 +89,9 @@ namespace TestOkur.Optic.Tests
                 Answers = "BBB".ParseAnswerkeyAnswers()
             });
             var form = new StudentOpticalForm('A');
-            form.SetFromScanOutput(new ScanOutput("AAABBB", 1), answerKeyForm);
+            var random = new Random();
+
+            form.SetFromScanOutput(new ScanOutput("AAABBB", 1,random.Next(1000),'A'), answerKeyForm);
             form.Evaluate(0, null);
             form.CorrectCount.Should().Be(6);
             answerKeyForm.Sections.First().Answers = "CCC".ParseAnswerkeyAnswers();
@@ -210,7 +214,9 @@ namespace TestOkur.Optic.Tests
             answerKeyOpticalForm.AddSection(CreateSection(4, "Social Science", 8));
             var answers = Enumerable.Repeat('A', 48);
             var studentForm = new StudentOpticalForm('A');
-            studentForm.SetFromScanOutput(new ScanOutput(answers, 0), answerKeyOpticalForm);
+            var random = new Random();
+
+            studentForm.SetFromScanOutput(new ScanOutput(answers, 0,random.Next(1000),'A'), answerKeyOpticalForm);
 
             studentForm.Evaluate(answerKeyOpticalForm.IncorrectEliminationRate, answerKeyOpticalForm.ScoreFormulas);
             studentForm.Net.Should().Be(48);
@@ -248,7 +254,9 @@ namespace TestOkur.Optic.Tests
             });
 
             var studentForm = new StudentOpticalForm('A');
-            studentForm.SetFromScanOutput(new ScanOutput("AAAAAAG AAA AAA    ", 0), answerKeyOpticalForm);
+            var random = new Random();
+
+            studentForm.SetFromScanOutput(new ScanOutput("AAAAAAG AAA AAA    ", 0,random.Next(),'A'), answerKeyOpticalForm);
             studentForm.Evaluate(answerKeyOpticalForm.IncorrectEliminationRate, answerKeyOpticalForm.ScoreFormulas);
             studentForm.CorrectCount.Should().Be(5);
             studentForm.WrongCount.Should().Be(8);
