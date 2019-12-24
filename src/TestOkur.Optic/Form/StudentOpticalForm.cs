@@ -212,6 +212,18 @@
             }
         }
 
+        public StudentOpticalForm Merge(StudentOpticalForm form)
+        {
+            if (form == null)
+            {
+                throw new ArgumentNullException(nameof(form));
+            }
+
+            AddSections(form.Sections);
+
+            return this;
+        }
+
         public void AddSections(IEnumerable<StudentOpticalFormSection> sections)
         {
             Sections = Sections
