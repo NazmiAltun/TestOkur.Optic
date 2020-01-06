@@ -1,8 +1,5 @@
 ﻿namespace TestOkur.Optic.Form
 {
-    using System.Runtime.Serialization;
-
-    [DataContract]
     public class StudentSubjectDetail
     {
         public StudentSubjectDetail(string lesson, string subject, string questionNos, int correctCount, int wrongCount, int emptyCount)
@@ -15,28 +12,24 @@
             EmptyCount = emptyCount;
             var total = correctCount + wrongCount + emptyCount;
             SuccessPercent = total == 0 ? 0 : CorrectCount * 100 / total;
-
         }
 
-        [DataMember]
-        public string Lesson { get; internal set; }
+        public StudentSubjectDetail()
+        {
+        }
 
-        [DataMember]
-        public string Subject { get; internal set; }
+        public string Lesson { get; set; }
 
-        [DataMember]
-        public string QuestionNos { get; internal set; }
+        public string Subject { get; set; }
 
-        [DataMember]
-        public int CorrectCount { get; internal set; }
+        public string QuestionNos { get; set; }
 
-        [DataMember]
-        public int WrongCount { get; internal set; }
+        public int CorrectCount { get; set; }
 
-        [DataMember]
-        public int EmptyCount { get; internal set; }
+        public int WrongCount { get; set; }
 
-        [DataMember]
-        public int SuccessPercent { get; internal set; }
+        public int EmptyCount { get; set; }
+
+        public int SuccessPercent { get; set; }
     }
 }

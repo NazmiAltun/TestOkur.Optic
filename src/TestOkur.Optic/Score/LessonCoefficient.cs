@@ -1,20 +1,19 @@
 ﻿namespace TestOkur.Optic.Score
 {
-	using System.Runtime.Serialization;
-
-	[DataContract]
 	public class LessonCoefficient
 	{
-		public LessonCoefficient(string lesson, float coefficient)
+        public LessonCoefficient(string lesson, float coefficient)
 		{
 			Lesson = lesson;
 			Coefficient = coefficient;
 		}
 
-		[DataMember]
-		public string Lesson { get; private set; }
+        public LessonCoefficient()
+        {
+        }
 
-		[DataMember]
-		public float Coefficient { get; private set; }
+        public string Lesson { get; set; }
+
+        public float Coefficient { get; set; }
 	}
 }

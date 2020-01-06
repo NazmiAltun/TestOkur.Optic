@@ -1,8 +1,5 @@
 ﻿namespace TestOkur.Optic.Form
 {
-	using System.Runtime.Serialization;
-
-	[DataContract]
 	public class Average
 	{
 		public Average(string name, float general, float city, float district, float school, float classroom)
@@ -15,22 +12,20 @@
 			Classroom = classroom;
 		}
 
-		[DataMember]
-		public string Name { get; private set; }
+		public Average()
+        {
+        }
 
-		[DataMember]
-		public float General { get; private set; }
+		public string Name { get; set; }
 
-		[DataMember]
-		public float City { get; private set; }
+		public float General { get; set; }
 
-		[DataMember]
-		public float District { get; private set; }
+		public float City { get; set; }
 
-		[DataMember]
-		public float School { get; private set; }
+		public float District { get; set; }
 
-		[DataMember]
-		public float Classroom { get; private set; }
+		public float School { get; set; }
+
+		public float Classroom { get; set; }
 	}
 }

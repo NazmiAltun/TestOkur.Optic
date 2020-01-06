@@ -1,8 +1,5 @@
 ﻿namespace TestOkur.Optic.Form
 {
-	using System.Runtime.Serialization;
-
-	[DataContract]
 	public class StudentOrder
 	{
 		public StudentOrder(string name, int classroomOrder, int schoolOrder, int districtOrder, int cityOrder, int generalOrder)
@@ -15,22 +12,20 @@
 			GeneralOrder = generalOrder;
 		}
 
-		[DataMember]
-		public string Name { get; private set; }
+		public StudentOrder()
+        {
+        }
 
-		[DataMember]
-		public int ClassroomOrder { get; private set; }
+		public string Name { get; set; }
 
-		[DataMember]
-		public int SchoolOrder { get; private set; }
+		public int ClassroomOrder { get; set; }
 
-		[DataMember]
-		public int DistrictOrder { get; private set; }
+		public int SchoolOrder { get; set; }
 
-		[DataMember]
-		public int CityOrder { get; private set; }
+		public int DistrictOrder { get; set; }
 
-		[DataMember]
-		public int GeneralOrder { get; private set; }
+		public int CityOrder { get; set; }
+
+		public int GeneralOrder { get; set; }
 	}
 }

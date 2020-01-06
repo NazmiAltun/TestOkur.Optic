@@ -1,24 +1,16 @@
 ﻿namespace TestOkur.Optic.Form
 {
-	using System.Runtime.Serialization;
-
-	[DataContract]
 	public abstract class FormLessonSection
 	{
-		[DataMember]
-		public int LessonId { get; protected set; }
+		public int LessonId { get; set; }
 
-		[DataMember]
-		public string LessonName { get; protected set; }
+		public string LessonName { get; set; }
 
-		[DataMember]
-		public int MaxQuestionCount { get; protected set; }
+		public int MaxQuestionCount { get; set; }
 
-		[DataMember]
-		public int FormPart { get; protected set; }
+		public int FormPart { get; set; }
 
-		[DataMember]
-		public int ListOrder { get; protected set; }
+		public int ListOrder { get; set; }
 
 		public override bool Equals(object obj)
 		{

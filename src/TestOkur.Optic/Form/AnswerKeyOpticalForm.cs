@@ -2,11 +2,9 @@
 {
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Runtime.Serialization;
 	using TestOkur.Optic.Answer;
 	using TestOkur.Optic.Score;
 
-	[DataContract]
 	public class AnswerKeyOpticalForm : OpticalForm
 	{
 		public AnswerKeyOpticalForm(char booklet, List<ScoreFormula> scoreFormulas)
@@ -32,18 +30,14 @@
 
 		public bool Empty => Sections.SelectMany(s => s.Answers).All(a => a.QuestionNo == default);
 
-		[DataMember]
 		public int IncorrectEliminationRate { get; set; }
 
-		[DataMember]
 		public List<AnswerKeyOpticalFormSection> Sections { get; set; }
 
 		public IReadOnlyList<AnswerKeyQuestionAnswer> Answers => Sections.SelectMany(s => s.Answers).ToList();
 
-		[DataMember]
 		public List<ScoreFormula> ScoreFormulas { get; set; }
 
-        [DataMember]
 		public bool SharedExam { get; set; }
 
 		public void AddSection(AnswerKeyOpticalFormSection section)

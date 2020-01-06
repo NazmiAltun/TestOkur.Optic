@@ -1,17 +1,15 @@
 ﻿namespace TestOkur.Optic.Form
 {
 	using System;
-	using System.Runtime.Serialization;
 
-	[DataContract]
 	public abstract class OpticalForm
 	{
-		protected OpticalForm()
+        protected OpticalForm()
 		{
 			CreateDateTimeUtc = DateTime.UtcNow;
 		}
 
-		protected OpticalForm(OpticalForm form, char booklet)
+        protected OpticalForm(OpticalForm form, char booklet)
 		{
 			ExamId = form.ExamId;
 			UserId = form.UserId;
@@ -21,31 +19,22 @@
 			Booklet = booklet;
 		}
 
-		[DataMember]
-		public string Id { get; set; }
+        public string Id { get; set; }
 
-		[DataMember]
-		public string UserId { get; set; }
+        public string UserId { get; set; }
 
-		[DataMember]
-		public int SchoolId { get; set; }
+        public int SchoolId { get; set; }
 
-		[DataMember]
-		public int ExamId { get; set; }
+        public int ExamId { get; set; }
 
-		[DataMember]
-		public DateTime ExamDate { get; set; }
+        public DateTime ExamDate { get; set; }
 
-		[DataMember]
-		public string ExamName { get; set; }
+        public string ExamName { get; set; }
 
-		[DataMember]
-		public string ExamTypeName { get; set; }
+        public string ExamTypeName { get; set; }
 
-		[DataMember]
-		public char Booklet { get; set; }
+        public char Booklet { get; set; }
 
-		[DataMember]
-		public DateTime CreateDateTimeUtc { get; set; }
+        public DateTime CreateDateTimeUtc { get; set; }
 	}
 }

@@ -19,14 +19,13 @@
         {
         }
 
-        public char[] Answers { get; private set; }
+        public char[] Answers { get; set; }
 
-        public int FormPart { get; private set; }
+        public int FormPart { get; set; }
 
-        public int StudentNumber { get; private set; }
+        public int StudentNumber { get; set; }
 
-        public char Booklet { get; private set; }
-
+        public char Booklet { get; set; }
 
         public char Next()
         {
