@@ -56,16 +56,6 @@
 
         public int DistrictId { get; set; }
 
-        public int GeneralAttendanceCount { get; set; }
-
-        public int CityAttendanceCount { get; set; }
-
-        public int DistrictAttendanceCount { get; set; }
-
-        public int SchoolAttendanceCount { get; set; }
-
-        public int ClassroomAttendanceCount { get; set; }
-
         public List<StudentOrder> Orders { get; set; }
 
         public int EmptyCount => Sections.Select(s => s.EmptyCount).Sum();
@@ -80,32 +70,7 @@
         public float Net => Sections.Select(s => s.Net).Sum();
 
         public float SuccessPercent => CalculateSuccessPercent();
-
-        public float ClassroomAverageNet => Sections
-            .SelectMany(s => s.Averages)
-            .Where(a => a.Name == "NET")
-            .Select(a => a.Classroom).Sum();
-
-        public float SchoolAverageNet => Sections
-            .SelectMany(s => s.Averages)
-            .Where(a => a.Name == "NET")
-            .Select(a => a.School).Sum();
-
-        public float DistrictAverageNet => Sections
-            .SelectMany(s => s.Averages)
-            .Where(a => a.Name == "NET")
-            .Select(a => a.District).Sum();
-
-        public float CityAverageNet => Sections
-            .SelectMany(s => s.Averages)
-            .Where(a => a.Name == "NET")
-            .Select(a => a.City).Sum();
-
-        public float GeneralAverageNet => Sections
-            .SelectMany(s => s.Averages)
-            .Where(a => a.Name == "NET")
-            .Select(a => a.General).Sum();
-
+        
         public int ClassOrder => Orders?.FirstOrDefault(o => o.Name == "NET")?.ClassroomOrder ?? 0;
 
         public int SchoolOrder => Orders?.FirstOrDefault(o => o.Name == "NET")?.SchoolOrder ?? 0;
@@ -118,18 +83,8 @@
 
         public float Score => Scores.Any() ? Scores.First().Value : SuccessPercent;
 
-        public float ClassScoreAverage { get; set; }
-
-        public float SchoolScoreAverage { get; set; }
-
         public int Grade { get; set; }
-
-        public float DistrictScoreAverage { get; set; }
-
-        public float CityScoreAverage { get; set; }
-
-        public float GeneralScoreAverage { get; set; }
-
+        
         public ScanOutput ScanOutput { get; set; }
 
         public void UpdateCorrectAnswers(AnswerKeyOpticalForm answerKeyOpticalForm)
@@ -219,28 +174,6 @@
                     .ToList(),
             };
             Sections.Add(section);
-        }
-
-        public void SetAttendance(IReadOnlyCollection<StudentOpticalForm> forms)
-        {
-            GeneralAttendanceCount = forms.Count;
-            CityAttendanceCount = forms.Count(f => f.CityId == CityId);
-            DistrictAttendanceCount = forms.Count(f => f.DistrictId == DistrictId);
-            ClassroomAttendanceCount = forms.Count(f => f.ClassroomId == ClassroomId);
-            SchoolAttendanceCount = forms.Count(f => f.SchoolId == SchoolId);
-        }
-
-        public void SetAverages(IReadOnlyCollection<StudentOpticalForm> forms)
-        {
-            CityScoreAverage = forms.Where(f => f.CityId == CityId)
-                .Average(f => f.Score);
-            ClassScoreAverage = forms.Where(f => f.ClassroomId == ClassroomId)
-                .Average(f => f.Score);
-            DistrictScoreAverage = forms.Where(f => f.DistrictId == DistrictId)
-                .Average(f => f.Score);
-            GeneralScoreAverage = forms.Average(f => f.Score);
-            SchoolScoreAverage = forms.Where(f => f.SchoolId == SchoolId)
-                .Average(f => f.Score);
         }
 
         private void EvaluateSections(int incorrectEliminationRate)

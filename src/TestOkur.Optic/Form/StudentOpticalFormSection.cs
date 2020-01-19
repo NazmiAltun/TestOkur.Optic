@@ -19,7 +19,6 @@
 		public StudentOpticalFormSection()
 		{
 			Answers = new List<QuestionAnswer>();
-			Averages = new List<Average>();
 		}
 
 		public List<QuestionAnswer> Answers { get; set; }
@@ -34,19 +33,7 @@
 
 		public float Net { get; set; }
 
-		public List<Average> Averages { get; set; }
-
 		public float SuccessPercent => AnswerCount == 0 ? 0 : Net / AnswerCount * 100;
-
-		public float ClassroomAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.Classroom ?? 0;
-
-		public float SchoolAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.School ?? 0;
-
-		public float DistrictAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.District ?? 0;
-
-		public float CityAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.City ?? 0;
-
-		public float GeneralAverageNet => Averages?.FirstOrDefault(a => a.Name == "NET")?.General ?? 0;
 
 		private int AnswerCount => Answers.Count(a => a.Result != QuestionAnswerResult.NoResult &&
 													  a.CorrectAnswer != QuestionAnswer.Empty);
@@ -64,13 +51,6 @@
 		public void Evaluate(int incorrectEliminationRate)
 		{
 			CalculateResult(incorrectEliminationRate);
-		}
-
-		public void ClearLessonAverages() => Averages.Clear();
-
-		public void AddLessonAverage(Average average)
-		{
-			Averages.Add(average);
 		}
 
 		private void CalculateResult(int incorrectEliminationRate)
