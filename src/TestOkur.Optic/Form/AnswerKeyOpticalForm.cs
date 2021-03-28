@@ -20,7 +20,7 @@
 			ScoreFormulas = new List<ScoreFormula>();
 		}
 
-		private AnswerKeyOpticalForm(AnswerKeyOpticalForm form, char booklet)
+		public AnswerKeyOpticalForm(AnswerKeyOpticalForm form, char booklet)
 			: base(form, booklet)
 		{
 			IncorrectEliminationRate = form.IncorrectEliminationRate;

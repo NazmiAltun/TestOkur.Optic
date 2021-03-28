@@ -15,7 +15,7 @@
             Booklet = booklet;
         }
 
-        private ScanOutput()
+        public ScanOutput()
         {
         }
 
